@@ -23,9 +23,9 @@ namespace MoneyLover.UI
         
         private void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow();
             SignIn signinWindow = new SignIn();
             signinWindow.ShowDialog();
-            this.Hide();
 
         }
 
@@ -33,7 +33,7 @@ namespace MoneyLover.UI
         {
             Register registerWindow = new Register();
             registerWindow.ShowDialog();
-            this.Hide();
+            this.Close();
         }
     }
 }
