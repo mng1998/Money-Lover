@@ -10,8 +10,8 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="#D3D3D3"
-        Height="650" Width="400"
+        Background="#EEEEEE"
+        Height="600" Width="350"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
@@ -34,9 +34,10 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center" FontFamily="Arial"/>
-            <TextBox Grid.Row ="3" Height="50" Width="370" Foreground="Green" materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True" />
-            <PasswordBox Grid.Row ="4" Height="50" Width="370" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" Foreground="Green"/>
-            <Button x:Name="btnRegister" Grid.Row ="5" Height="50" Width="370" Content="ĐĂNG KÝ" Background="DarkGreen" TextElement.Foreground="White" TextElement.FontSize="13" Click="BtnRegister_Click"/>
+            <TextBox Grid.Row ="3" Height="50" Width="320" Foreground="Green" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <PasswordBox Grid.Row ="4" Height="50" Width="320" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" Foreground="Green"/>
+            <Button x:Name="btnRegister" Grid.Row ="5" Height="50" Width="320" Content="ĐĂNG KÝ" Background="#2DB84C" TextElement.Foreground="White" TextElement.FontSize="13" Click="BtnRegister_Click"/>
+            
         </Grid>
     </Grid>
 </Window>

@@ -10,11 +10,12 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="#D3D3D3"
-        Height="650" Width="400"
+        Background="#EEEEEE"
+        Height="600" Width="350"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
+    
     <Grid>
         <Grid >
             <Grid.ColumnDefinitions>
@@ -30,12 +31,11 @@
                 <RowDefinition Height = "*" />
                 <RowDefinition Height = "*" />
                 <RowDefinition Height = "*" />
-                <RowDefinition Height = "*" />
             </Grid.RowDefinitions>           
-            <TextBlock Grid.Row ="2" Text="Đăng nhập bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center" FontFamily="Arial"/>
-            <TextBox Grid.Row ="3" Height="50" Width="370" Foreground="Green" materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True"/>
-            <PasswordBox Grid.Row ="4" Height="50" Width="370" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" Foreground="Green"/>
-            <Button x:Name="btnSignIn" Grid.Row ="5" Height="50" Width="370" Content="SIGN IN" Background="DarkGreen" TextElement.Foreground="White" TextElement.FontSize="13" Click="BtnSignIn_Click"/>
+            <TextBlock Grid.Row="2" Text="Đăng nhập bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center" FontFamily="Arial"/>
+            <TextBox Grid.Row="3" Height="auto" Width="320" Foreground="Green" materialDesign:HintAssist.Hint="Email"  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            <PasswordBox Grid.Row="4" Height="auto" Width="320" Foreground="Green" materialDesign:HintAssist.Hint="Mật khẩu" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+            <Button x:Name="btnSignIn" Grid.Row ="5" Height="50" Width="320" Content="SIGN IN" Background="#2DB84C" TextElement.Foreground="White" TextElement.FontSize="13" Click="BtnSignIn_Click"/>
         </Grid>
     </Grid>
 </Window>
