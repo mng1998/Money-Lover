@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MoneyLover.UI.Models;
 
 namespace MoneyLover.UI.Services
@@ -43,16 +44,28 @@ namespace MoneyLover.UI.Services
             }
             catch
             {
+                MessageBox.Show("Nhập sai định dạng email!");
                 return false;
             }
         }
 
         private bool IsValidPassword(string password)
         {
-            return
-               password.Any(c => IsLetter(c)) &&
-               password.Any(c => IsDigit(c)) &&
-               password.Any(c => IsSymbol(c));
+            if (password.Length < 8)
+            {
+                MessageBox.Show("Mật khẩu tối thiểu có 8 ký tự!");
+                return false;
+            }
+            else
+            {
+                if (password.Any(c => IsLetter(c)) && password.Any(c => IsDigit(c)) && password.Any(c => IsSymbol(c)))
+                    return true;
+                else
+                {
+                    MessageBox.Show("Nhập sai định dạng Mật khẩu!");
+                    return false;
+                }
+            }
         }
 
         private bool IsLetter(char c)

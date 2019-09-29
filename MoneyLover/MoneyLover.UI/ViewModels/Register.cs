@@ -23,11 +23,6 @@ namespace MoneyLover.UI.ViewModels
                  {
                      MessageBox.Show("Register Completed !");
                  }
-                 else
-                 {
-                     MessageBox.Show("Email or Password is invalid!");
-                 }
-
              };
 
             registerView.btnBack.Click += (sender, e) =>
