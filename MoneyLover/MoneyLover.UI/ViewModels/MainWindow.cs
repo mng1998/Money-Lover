@@ -16,6 +16,10 @@ namespace MoneyLover.UI.ViewModels
         public MainWindow()
         {
             mainwindowView = new Views.MainWindow();
+        }
+
+        public void Show()
+        {
             mainwindowView.Show();
         }
     }

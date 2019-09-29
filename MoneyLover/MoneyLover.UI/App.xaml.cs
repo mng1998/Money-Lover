@@ -14,5 +14,10 @@ namespace MoneyLover.UI
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            ViewModels.MainWindow mainWindow = new ViewModels.MainWindow();
+            mainWindow.Show();
+        }
     }
 }

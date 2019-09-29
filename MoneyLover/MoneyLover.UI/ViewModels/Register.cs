@@ -8,7 +8,7 @@ using MoneyLover.UI.Models;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class Register
+    public class Register : Services.AccountService
     {
         private Views.Register registerView;
         private Views.SignIn signInView;
@@ -20,24 +20,10 @@ namespace MoneyLover.UI.ViewModels
 
             registerView.btnRegister.Click += (sender, e) =>
              {
-                 string email = registerView.txtEmail.Text;
-                 string passowrd = registerView.psdPassword.Password;
-
-                 if(IsValidEmail(email))
+                 if (Register(registerView.txtEmail.Text, registerView.psdPassword.Password))
                  {
-                     using (var db = new DB.MoneyLoverDB())
-                     {
-                         db.Users.Add(new User { Email = email, Password = passowrd });
-                         db.SaveChanges();
-                     }
-
-                    // MessageBox.Show("Đăng kí thành công!", "Thông Báo", MessageBoxImage.Information);
+                     MessageBox.Show("Đăng kí thành công!", "Thông Báo", MessageBoxImage.Information);
                  }
-                 else
-                 {
-                     MessageBox.Show("Nhập sai định dạng email!","Error",MessageBoxButton.OK,MessageBoxImage.Error);
-                 }
-                 
              };
 
             registerView.btnBack.Click += (sender, e) =>
@@ -58,19 +44,6 @@ namespace MoneyLover.UI.ViewModels
         public void Show()
         {
             registerView.Show();
-        }
-
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
         }
     }
 }
