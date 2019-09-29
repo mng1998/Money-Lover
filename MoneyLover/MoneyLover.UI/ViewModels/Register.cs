@@ -11,6 +11,7 @@ namespace MoneyLover.UI.ViewModels
     public class Register
     {
         private Views.Register registerView;
+        private Views.SignIn signInView;
         private Views.MainWindow mainwindowView;
 
         public Register()
@@ -30,11 +31,11 @@ namespace MoneyLover.UI.ViewModels
                          db.SaveChanges();
                      }
 
-                     MessageBox.Show("Register Completed !");
+                    // MessageBox.Show("Đăng kí thành công!", "Thông Báo", MessageBoxImage.Information);
                  }
                  else
                  {
-                     MessageBox.Show("Email is invalid!");
+                     MessageBox.Show("Nhập sai định dạng email!","Error",MessageBoxButton.OK,MessageBoxImage.Error);
                  }
                  
              };
@@ -46,9 +47,11 @@ namespace MoneyLover.UI.ViewModels
                 mainwindowView.Show();
             };
 
-            registerView.btnExit.Click += (sender, e) =>
+            registerView.btnsignIn.Click += (sender, e) =>
             {
-                Application.Current.Shutdown();
+                registerView.Close();
+                signInView = new Views.SignIn();
+                signInView.Show();
             };
         }
 

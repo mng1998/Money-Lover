@@ -11,6 +11,7 @@ namespace MoneyLover.UI.ViewModels
     public class SignIn
     {
         private Views.SignIn signinView;
+        private Views.Register registerView;
         private Views.MainWindow mainwindowView;
 
         public SignIn()
@@ -24,9 +25,11 @@ namespace MoneyLover.UI.ViewModels
                 mainwindowView.Show();
             };
 
-            signinView.btnExit.Click += (sender, e) =>
+            signinView.btnRegister.Click += (sender, e) =>
             {
-                Application.Current.Shutdown();
+                signinView.Close();
+                registerView = new Views.Register();
+                registerView.Show();
             };
 
             signinView.btnSignIn.Click += (sender, e) =>

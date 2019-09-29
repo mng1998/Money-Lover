@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
+        TextElement.FontFamily="Arial"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="#EEEEEE"
@@ -33,14 +34,19 @@
                 <RowDefinition Height = "*" />
             </Grid.RowDefinitions>
 
-            <Button x:Name="btnBack" Grid.Row ="0" Height="30" HorizontalAlignment="Left" Content="Back" TextElement.Foreground="White" TextElement.FontSize="10"/>
-            <Button x:Name="btnExit" Grid.Row ="0" Height="30" HorizontalAlignment="Right" Content="Exit" TextElement.Foreground="White" TextElement.FontSize="10"/>
-
-            <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center" FontFamily="Arial"/>
+            <Button x:Name="btnBack" HorizontalAlignment="Left" Height="30" TextElement.Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=ArrowLeft}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Trở về" />
+            <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center"/>
             <TextBox x:Name="txtEmail" Grid.Row ="3" Height="50" Width="320" Foreground="Green" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <PasswordBox x:Name="psdPassword" Grid.Row ="4" Height="50" Width="320" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" Foreground="Green"/>
-            <Button x:Name="btnRegister" Grid.Row ="5" Height="50" Width="320" Content="ĐĂNG KÝ" Background="#2DB84C" TextElement.Foreground="White" TextElement.FontSize="13"/>
-            
+            <Button x:Name="btnRegister" Grid.Row ="5" Height="50" Width="320" Content="ĐĂNG KÝ" Background="#2DB84C" TextElement.Foreground="White" TextElement.FontSize="13">
+            </Button>
+            <Button x:Name="btnsignIn" Grid.Row ="8" Height="30" Content="ĐĂNG NHẬP" 
+                    TextElement.Foreground="Green" TextElement.FontSize="12"
+                    Style="{StaticResource MaterialDesignFlatButton}"/>
+
         </Grid>
     </Grid>
 </Window>
