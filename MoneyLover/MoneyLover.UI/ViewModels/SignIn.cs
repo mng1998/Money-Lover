@@ -8,7 +8,7 @@ using MoneyLover.UI.Models;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class SignIn
+    public class SignIn : Services.AccountService
     {
         private Views.SignIn signinView;
         private Views.MainWindow mainwindowView;
@@ -31,22 +31,10 @@ namespace MoneyLover.UI.ViewModels
 
             signinView.btnSignIn.Click += (sender, e) =>
             {
-                using (var db = new DB.MoneyLoverDB())
-                {
-                    string email = signinView.txtEmail.Text;
-                    User user = db.Users.Where(m => m.Email == email).SingleOrDefault();
-                    if (user != null)
-                    {
-                        if (user.Password == signinView.psdPassword.Password)
-                        {
-                            MessageBox.Show("Login Success!");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Email or Password is not correct!");
-                    }
-                }
+                if (Login(signinView.txtEmail.Text, signinView.psdPassword.Password))
+                    MessageBox.Show("Login Success!");
+                else
+                    MessageBox.Show("Email or Password is not correct!");
             };
         }
 
