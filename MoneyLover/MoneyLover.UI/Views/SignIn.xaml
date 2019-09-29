@@ -34,7 +34,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height = "*" />
+                <RowDefinition Height = "50" />
                 <RowDefinition Height = "*" />
                 <RowDefinition Height = "*" />
                 <RowDefinition Height = "*" />
@@ -46,6 +46,10 @@
 
             <Button x:Name="btnBack" HorizontalAlignment="Left" Height="30" TextElement.Foreground="Black"
                     Content="{materialDesign:PackIcon Kind=ArrowLeft}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Trở về" />
+            <Button x:Name="btnExit" HorizontalAlignment="Right" Height="30" TextElement.Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=WindowClose}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     ToolTip="Trở về" />
                         

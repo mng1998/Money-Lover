@@ -82,6 +82,12 @@
     <Compile Include="ViewModels\PassbookList.cs" />
     <Compile Include="ViewModels\Register.cs" />
     <Compile Include="ViewModels\SignIn.cs" />
+    <Compile Include="Views\Bank.xaml.cs">
+      <DependentUpon>Bank.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPassBook.xaml.cs">
+      <DependentUpon>EditPassBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PassBook.xaml.cs">
       <DependentUpon>PassBook.xaml</DependentUpon>
     </Compile>
@@ -94,9 +100,17 @@
     <Compile Include="Views\SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="Views\Withdrawal.xaml.cs">
+      <DependentUpon>Withdrawal.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Bank.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPassBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -125,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window1.xaml">
+    <Page Include="Views\Withdrawal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
