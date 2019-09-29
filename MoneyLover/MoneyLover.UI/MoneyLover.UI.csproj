@@ -78,6 +78,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="ViewModels\MainWindow.cs" />
+    <Compile Include="ViewModels\PassBook.cs" />
     <Compile Include="ViewModels\PassbookList.cs" />
     <Compile Include="ViewModels\Register.cs" />
     <Compile Include="ViewModels\SignIn.cs" />
