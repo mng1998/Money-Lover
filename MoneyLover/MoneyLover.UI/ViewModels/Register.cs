@@ -11,6 +11,7 @@ namespace MoneyLover.UI.ViewModels
     public class Register : Services.AccountService
     {
         private Views.Register registerView;
+        private Views.SignIn signInView;
         private Views.MainWindow mainwindowView;
 
         public Register()
@@ -21,7 +22,7 @@ namespace MoneyLover.UI.ViewModels
              {
                  if (Register(registerView.txtEmail.Text, registerView.psdPassword.Password))
                  {
-                     MessageBox.Show("Register Completed !");
+                     MessageBox.Show("Đăng kí thành công!", "Thông Báo", MessageBoxImage.Information);
                  }
              };
 
@@ -32,9 +33,11 @@ namespace MoneyLover.UI.ViewModels
                 mainwindowView.Show();
             };
 
-            registerView.btnExit.Click += (sender, e) =>
+            registerView.btnsignIn.Click += (sender, e) =>
             {
-                Application.Current.Shutdown();
+                registerView.Close();
+                signInView = new Views.SignIn();
+                signInView.Show();
             };
         }
 
