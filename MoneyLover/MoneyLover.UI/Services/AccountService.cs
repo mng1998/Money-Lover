@@ -44,7 +44,7 @@ namespace MoneyLover.UI.Services
             }
             catch
             {
-                MessageBox.Show("Nhập sai định dạng email!");
+                MessageBox.Show("Nhập sai định dạng email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
         }
@@ -53,7 +53,7 @@ namespace MoneyLover.UI.Services
         {
             if (password.Length < 8)
             {
-                MessageBox.Show("Mật khẩu tối thiểu có 8 ký tự!");
+                MessageBox.Show("Mật khẩu tối thiểu có 8 ký tự!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else
@@ -62,7 +62,7 @@ namespace MoneyLover.UI.Services
                     return true;
                 else
                 {
-                    MessageBox.Show("Nhập sai định dạng Mật khẩu!");
+                    MessageBox.Show("Nhập sai định dạng Mật khẩu!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
             }
