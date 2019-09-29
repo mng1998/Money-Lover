@@ -1,5 +1,5 @@
-﻿<Window x:Class="MoneyLover.UI.Views.PassBook"
-         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window x:Class="MoneyLover.UI.Views.EditPassBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -41,32 +41,33 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <materialDesign:ColorZone Mode="PrimaryMid" Padding="16">
+        <materialDesign:ColorZone
+          Mode="PrimaryMid"
+          Padding="16"> 
             <DockPanel>
                 <Button
-      VerticalAlignment="Center" TextElement.Foreground="White"
-      Style="{StaticResource MaterialDesignFlatButton}"
-      Content="{materialDesign:PackIcon Kind=WindowClose}"
-      DockPanel.Dock="Right" />
-                <StackPanel
-      Orientation="Horizontal"
-      materialDesign:RippleAssist.IsCentered="True">
+                  VerticalAlignment="Center" TextElement.Foreground="White"
+                  Style="{StaticResource MaterialDesignFlatButton}"
+                  Content="{materialDesign:PackIcon Kind=WindowClose}"
+                  DockPanel.Dock="Right" /> 
+                <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
                     <ToggleButton Foreground="White" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
                     <TextBlock
-                  VerticalAlignment="Center"
-                  Margin="16 0 0 0"
-                  Foreground="White"
-                  FontSize="20">
-                Thêm sổ tiết kiệm của bạn
+                          VerticalAlignment="Center"
+                          Margin="16 0 0 0"
+                          TextElement.Foreground="White"
+                          FontSize="20">
+                        Sửa sổ tiết kiệm của bạn
                     </TextBlock>
                     <Button
                         Style="{DynamicResource MaterialDesignToolForegroundButton}"
                         Margin="8 0 0 0"
-                        Panel.ZIndex="0">
+                        Panel.ZIndex="0">   
                     </Button>
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
+        
         <materialDesign:Card Grid.Row="1" Background="White" Margin="10">
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

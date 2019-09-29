@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height = "*" />
+                <RowDefinition Height = "50" />
                 <RowDefinition Height = "*" />
                 <RowDefinition Height = "*" />
                 <RowDefinition Height = "*" />
@@ -38,6 +38,10 @@
                     Content="{materialDesign:PackIcon Kind=ArrowLeft}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     ToolTip="Trở về" />
+            <Button x:Name="btnExit" HorizontalAlignment="Right" Height="30" TextElement.Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=WindowClose}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Thoát" />
             <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center"/>
             <TextBox x:Name="txtEmail" Grid.Row ="3" Height="50" Width="320" Foreground="Green" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <PasswordBox x:Name="psdPassword" Grid.Row ="4" Height="50" Width="320" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" Foreground="Green"/>
