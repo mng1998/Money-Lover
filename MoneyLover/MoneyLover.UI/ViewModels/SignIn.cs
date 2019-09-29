@@ -13,6 +13,8 @@ namespace MoneyLover.UI.ViewModels
         private Views.SignIn signinView;
         private Views.Register registerView;
         private Views.MainWindow mainwindowView;
+        private PassbookList passBookList;
+        private PassBook passBookVM;
 
         public SignIn()
         {
@@ -35,9 +37,13 @@ namespace MoneyLover.UI.ViewModels
             signinView.btnSignIn.Click += (sender, e) =>
             {
                 if (Login(signinView.txtEmail.Text, signinView.psdPassword.Password))
-                    MessageBox.Show("Login Success!");
+                {
+                    signinView.Close();
+                    passBookVM = new PassBook();
+                    passBookVM.Show();
+                }
                 else
-                    MessageBox.Show("Email or Password is not correct!");
+                    MessageBox.Show("Email hoặc Mật khẩu không chính xác!");
             };
         }
 

@@ -10,7 +10,10 @@ namespace MoneyLover.UI.DB
 {
     public class MoneyLoverDB : DbContext
     {
-        public MoneyLoverDB() : base("MoneyLover") { }
+        public MoneyLoverDB() : base("MoneyLoverDB")
+        {
+            Database.SetInitializer(new MoneyLoverSeedData());
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<PassBook> PassBooks { get; set; }

@@ -11,7 +11,8 @@ namespace MoneyLover.UI.Models
     public class PassBook
     {
         [Key]
-        public string PassBookID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PassBookID { get; set; }
 
         [ForeignKey("FKBank")]
         public int BankID { get; set; }
@@ -22,11 +23,12 @@ namespace MoneyLover.UI.Models
         public virtual User FKUser { get; set; }
 
         public DateTime SentDate { get; set; }
-        public float Deposit { get; set; }
+        public double Deposit { get; set; }
         public int Term { get; set; }
-        public float InterestRates { get; set; }
-        public float IndefiniteTerm { get; set; }
-        public string PayInterest { get; set; }
-        public string Due { get; set; }
+        public double InterestRates { get; set; }
+        public double IndefiniteTerm { get; set; }
+        public int PayInterest { get; set; }
+        public int Due { get; set; }
+        public bool Settlement { get; set; }
     }
 }
