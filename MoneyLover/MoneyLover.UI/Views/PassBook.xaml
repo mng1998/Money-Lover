@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         ResizeMode="NoResize"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen" Height="400">
+        WindowStartupLocation="CenterScreen" Height="360">
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
