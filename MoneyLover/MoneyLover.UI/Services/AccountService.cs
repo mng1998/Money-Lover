@@ -30,9 +30,19 @@ namespace MoneyLover.UI.Services
 
         public bool Login(string email, string password)
         {
-            User checkUser = db.Users.Where(m => m.Email == email).SingleOrDefault();
-            if (checkUser != null && checkUser.Password == password) return true;
+            User checkUser = db.Users.Where(m => m.Email == email).FirstOrDefault();
+            if (checkUser != null && checkUser.Password == password)
+            {
+                StoreUser(checkUser);
+                return true;
+            }
             else return false;
+        }
+
+        private void StoreUser(User user)
+        {
+            Application.Current.Resources["current_user_id"] = user.UserID;
+            Application.Current.Resources["user_signed_in"] = true;
         }
 
         private bool IsValidEmail(string email)

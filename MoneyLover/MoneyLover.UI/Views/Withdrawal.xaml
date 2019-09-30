@@ -3,7 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+<<<<<<< HEAD
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+=======
+        xmlns:local="clr-namespace:MoneyLover.UI.Views"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+>>>>>>> fabc42f8d92a06d1bc7c123620cbf339866b5c6b
          mc:Ignorable="d"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"

@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace MoneyLover.UI.ViewModels
 {
-    class PassbookList
+    public class PassbookList
     {
+        private Views.PassbookList passBookList;
+
+        public PassbookList()
+        {
+            passBookList = new Views.PassbookList();
+        }
+
+        public void Show()
+        {
+            passBookList.Show();
+        }
     }
 }

@@ -78,12 +78,16 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="ViewModels\MainWindow.cs" />
+    <Compile Include="ViewModels\PassBook.cs" />
     <Compile Include="ViewModels\PassbookList.cs" />
     <Compile Include="ViewModels\Register.cs" />
     <Compile Include="ViewModels\SignIn.cs" />
+<<<<<<< HEAD
     <Compile Include="Views\AddToPassbook.xaml.cs">
       <DependentUpon>AddToPassbook.xaml</DependentUpon>
     </Compile>
+=======
+>>>>>>> fabc42f8d92a06d1bc7c123620cbf339866b5c6b
     <Compile Include="Views\Bank.xaml.cs">
       <DependentUpon>Bank.xaml</DependentUpon>
     </Compile>
@@ -105,10 +109,13 @@
     <Compile Include="Views\Withdrawal.xaml.cs">
       <DependentUpon>Withdrawal.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Page Include="Views\AddToPassbook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+=======
+>>>>>>> fabc42f8d92a06d1bc7c123620cbf339866b5c6b
     <Page Include="Views\Bank.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -14,7 +14,11 @@
         TextOptions.TextRenderingMode="Auto"
         ResizeMode="NoResize"
         WindowStyle="None"
+<<<<<<< HEAD
         WindowStartupLocation="CenterScreen" Height="420">
+=======
+        WindowStartupLocation="CenterScreen" Height="360" Width="770">
+>>>>>>> fabc42f8d92a06d1bc7c123620cbf339866b5c6b
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -77,23 +81,31 @@
                 <StackPanel Margin="15" HorizontalAlignment="Center" Grid.Column="1">
 
                     <DatePicker x:Name="dpDate"  Foreground="Green" materialDesign:HintAssist.Hint="Ngày gửi" materialDesign:HintAssist.IsFloating="True" />
-                    <ComboBox x:Name="cbKyHan"  Foreground="Green" materialDesign:HintAssist.Hint="Kỳ hạn" materialDesign:HintAssist.IsFloating="True" />
-                    <TextBox x:Name="txt"  Foreground="Green" materialDesign:HintAssist.Hint="Lãi suất không kỳ hạn" materialDesign:HintAssist.IsFloating="True" />
-                    <ComboBox  x:Name="txtEmail"  Foreground="Green" materialDesign:HintAssist.Hint="Khi đến hạn" materialDesign:HintAssist.IsFloating="True" />
+                    <ComboBox x:Name="cbbTerm"  Foreground="Green" materialDesign:HintAssist.Hint="Kỳ hạn" materialDesign:HintAssist.IsFloating="True" />
+                    <TextBox x:Name="txtIndefiniteTerm"  Foreground="Green" materialDesign:HintAssist.Hint="Lãi suất không kỳ hạn" materialDesign:HintAssist.IsFloating="True" />
+                    <ComboBox x:Name="cbbDue"  Foreground="Green" materialDesign:HintAssist.Hint="Khi đến hạn" materialDesign:HintAssist.IsFloating="True" />
 
                 </StackPanel>
                 <StackPanel Margin="15" HorizontalAlignment="Center" Grid.Column="0">
-                    <ComboBox  Foreground="Green" materialDesign:HintAssist.Hint="Ngân hàng" materialDesign:HintAssist.IsFloating="True" />
-                    <TextBox  Foreground="Green" materialDesign:HintAssist.Hint="Số tiền gửi (VNĐ)" materialDesign:HintAssist.IsFloating="True" />
-                    <TextBox  Foreground="Green" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True" />
-                    <ComboBox Foreground="Green" materialDesign:HintAssist.Hint="Trả lãi" materialDesign:HintAssist.IsFloating="True" />
+                    <ComboBox x:Name="cbbBank" Foreground="Green" materialDesign:HintAssist.Hint="Ngân hàng" materialDesign:HintAssist.IsFloating="True" />
+                    <TextBox x:Name="txtDeposit" Foreground="Green" materialDesign:HintAssist.Hint="Số tiền gửi (VNĐ)" materialDesign:HintAssist.IsFloating="True" />
+                    <TextBox x:Name="txtInterestRates" Foreground="Green" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True" />
+                    <ComboBox x:Name="cbbPayInterest" Foreground="Green" materialDesign:HintAssist.Hint="Trả lãi" materialDesign:HintAssist.IsFloating="True" />
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
-        <Button Grid.Row="2" HorizontalAlignment="Right" Foreground="#2DB84C" Background="White" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="0,0,10,1.6">
+        <Button x:Name="btnCancel" Grid.Row="2" HorizontalAlignment="Right" Foreground="#2DB84C" Background="White" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="0,0,10,1.6">
             CANCEL
         </Button>
+<<<<<<< HEAD
         <Button Grid.Row="2" HorizontalAlignment="Center" Foreground="#2DB84C" Background="White" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="545,0.2,123,2.2">
+=======
+<<<<<<< HEAD
+        <Button x:Name="btnSave" Grid.Row="1" HorizontalAlignment="Center" Foreground="#2DB84C" Background="White" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="541,249.4,127,1.8" Grid.RowSpan="2">
+=======
+        <Button Grid.Row="2" HorizontalAlignment="Center" Foreground="#2DB84C" Background="White" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="545,0.2,123,2.2">
+>>>>>>> form added
+>>>>>>> fabc42f8d92a06d1bc7c123620cbf339866b5c6b
             SAVE
         </Button>
     </Grid>
