@@ -81,6 +81,9 @@
     <Compile Include="ViewModels\PassbookList.cs" />
     <Compile Include="ViewModels\Register.cs" />
     <Compile Include="ViewModels\SignIn.cs" />
+    <Compile Include="Views\AddToPassbook.xaml.cs">
+      <DependentUpon>AddToPassbook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Bank.xaml.cs">
       <DependentUpon>Bank.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
     <Compile Include="Views\Withdrawal.xaml.cs">
       <DependentUpon>Withdrawal.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AddToPassbook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Bank.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,10 +1,10 @@
-﻿<Window x:Class="MoneyLover.UI.Views.Withdrawal"
+﻿<Window x:Class="MoneyLover.UI.Views.AddToPassbook"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-         mc:Ignorable="d"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextElement.FontFamily="Arial"
@@ -32,12 +32,12 @@
                   Margin="16 0 0 0"
                   Foreground="White"
                   FontSize="20">
-                Tất toán tài khoản
+                Gửi thêm tiền vào tài khoản của bạn
                     </TextBlock>
                     <Button
                         Style="{DynamicResource MaterialDesignToolForegroundButton}"
                         Margin="8 0 0 0"
-                        Panel.ZIndex="0">       
+                        Panel.ZIndex="0">
                     </Button>
                 </StackPanel>
             </DockPanel>
