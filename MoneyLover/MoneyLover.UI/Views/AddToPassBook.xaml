@@ -1,0 +1,78 @@
+﻿<Window x:Class="MoneyLover.UI.Views.AddToPassbook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextElement.FontFamily="Arial"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="White"
+        Height="auto" Width="500"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Width" Value="420"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="Margin" Value="16 0 16 8"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <!--Header-->
+        <materialDesign:ColorZone Grid.Row="0" Mode="PrimaryMid" Padding="16">
+            <DockPanel>
+                <Button VerticalAlignment="Center" TextElement.Foreground="White" Style="{StaticResource MaterialDesignFlatButton}"
+                        Content="{materialDesign:PackIcon Kind=WindowClose}" DockPanel.Dock="Right" />
+                <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
+                    <ToggleButton Foreground="White" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                    <TextBlock
+                          Text="Gửi thêm tiền vào sổ tiết kiệm của bạn"
+                          VerticalAlignment="Center"
+                          Margin="16 0 0 0"
+                          Foreground="White"
+                          FontSize="20"/>
+                </StackPanel>
+            </DockPanel>
+        </materialDesign:ColorZone>
+        <materialDesign:Card Margin="15" Grid.Row="1" Background="White" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="2">
+                    <TextBox Text="Mã số: #29470394" FontSize="25"/>
+                    <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+                    <TextBox materialDesign:HintAssist.Hint="Ngày mở" materialDesign:HintAssist.IsFloating="True"/>
+                    <TextBox materialDesign:HintAssist.Hint="Số tiền gửi" materialDesign:HintAssist.IsFloating="True"/>
+                    <TextBox materialDesign:HintAssist.Hint="Kỳ hạn" materialDesign:HintAssist.IsFloating="True"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ngày mở" materialDesign:HintAssist.IsFloating="True"/>
+                    <TextBox materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True"/>
+                    <TextBox materialDesign:HintAssist.Hint="Số tiền gửi thêm" materialDesign:HintAssist.IsFloating="True"></TextBox>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <Button x:Name="btn" Grid.Row ="8" Height="40" Background="Green" Foreground="White" Content="SAVE"  Margin="15"
+                    TextElement.Foreground="Green" TextElement.FontSize="12"
+                    Style="{StaticResource MaterialDesignFlatButton}"/>
+
+
+    </Grid>
+</Window>
