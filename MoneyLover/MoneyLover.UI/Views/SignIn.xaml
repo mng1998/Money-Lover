@@ -48,6 +48,10 @@
                     Content="{materialDesign:PackIcon Kind=ArrowLeft}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     ToolTip="Trở về" />
+            <Button HorizontalAlignment="Right" Height="30" TextElement.Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=WindowClose}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Thoát" />
                         
             <TextBlock Grid.Row="2" Text="Đăng nhập bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center" FontFamily="Arial"/>
             <TextBox x:Name="txtEmail" Grid.Row="3" Foreground="Green" materialDesign:HintAssist.Hint="Email"  materialDesign:HintAssist.IsFloating="True" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,12 +68,15 @@ namespace MoneyLover.UI.ViewModels
 
                 if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(passBook.txtDeposit.Text)))
                 {
-                    db.PassBooks.Add(new Models.PassBook {
+                    db.PassBooks.Add(new Models.PassBook
+                    {
                         BankID = BankID,
                         Deposit = Convert.ToDouble(passBook.txtDeposit.Text),
                         Due = dueKey,
                         IndefiniteTerm = GetIndefiniteTerm(Convert.ToDouble(passBook.txtIndefiniteTerm.Text)),
-                        Term = TermKey, PayInterest = payInterestKey, SentDate = DateTime.Parse(passBook.dpDate.Text),
+                        Term = TermKey,
+                        PayInterest = payInterestKey,
+                        SentDate = DateTime.Parse(passBook.dpDate.Text),
                         UserID = current_user.UserID,
                         InterestRates = Convert.ToDouble(passBook.txtInterestRates.Text),
                         Settlement = false
