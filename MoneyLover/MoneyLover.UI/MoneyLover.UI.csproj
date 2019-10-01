@@ -77,11 +77,17 @@
     <Compile Include="Models\PassBook.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\PassBookService.cs" />
+    <Compile Include="ViewModels\AddToPassBook.cs" />
+    <Compile Include="ViewModels\Bank.cs" />
+    <Compile Include="ViewModels\EditPassBook.cs" />
     <Compile Include="ViewModels\MainWindow.cs" />
+    <Compile Include="ViewModels\PartialWithdrawal.cs" />
     <Compile Include="ViewModels\PassBook.cs" />
     <Compile Include="ViewModels\PassbookList.cs" />
     <Compile Include="ViewModels\Register.cs" />
     <Compile Include="ViewModels\SignIn.cs" />
+    <Compile Include="ViewModels\Withdrawal.cs" />
     <Compile Include="Views\AddToPassBook.xaml.cs">
       <DependentUpon>AddToPassBook.xaml</DependentUpon>
     </Compile>

@@ -23,6 +23,7 @@ namespace MoneyLover.UI.Models
         public virtual User FKUser { get; set; }
 
         public DateTime SentDate { get; set; }
+        public DateTime EndDate { get; set; }
         public double Deposit { get; set; }
         public int Term { get; set; }
         public double InterestRates { get; set; }

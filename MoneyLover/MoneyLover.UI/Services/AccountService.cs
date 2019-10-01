@@ -39,6 +39,12 @@ namespace MoneyLover.UI.Services
             else return false;
         }
 
+        public void Logout()
+        {
+            Application.Current.Resources["current_user_id"] = "";
+            Application.Current.Resources["user_signed_in"] = false;
+        }
+
         private void StoreUser(User user)
         {
             Application.Current.Resources["current_user_id"] = user.UserID;

@@ -45,6 +45,7 @@
           Padding="16">
             <DockPanel>
                 <Button
+                  x:Name="btnClose"
                   VerticalAlignment="Center" TextElement.Foreground="White"
                   Style="{StaticResource MaterialDesignFlatButton}"
                   Content="{materialDesign:PackIcon Kind=WindowClose}"
@@ -82,7 +83,22 @@
 
                 </StackPanel>
                 <StackPanel Margin="15" HorizontalAlignment="Center" Grid.Column="0">
-                    <ComboBox x:Name="cbbBank" Foreground="Green" materialDesign:HintAssist.Hint="Ngân hàng" materialDesign:HintAssist.IsFloating="True" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <ComboBox x:Name="cbbBank" Grid.Row="0" Foreground="Green" materialDesign:HintAssist.Hint="Ngân hàng" materialDesign:HintAssist.IsFloating="True" Width="290" HorizontalAlignment="Left"/>
+                        <Button
+                            x:Name="btnAddBank"
+                            Content="{materialDesign:PackIcon Kind=PlusCircleOutline}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Grid.Row="0"
+                            Height="40" Width="50"
+                            HorizontalAlignment="Right">
+                        </Button>
+                    </Grid>
+                    
                     <TextBox x:Name="txtDeposit" Foreground="Green" materialDesign:HintAssist.Hint="Số tiền gửi (VNĐ)" materialDesign:HintAssist.IsFloating="True" />
                     <TextBox x:Name="txtInterestRates" Foreground="Green" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True" />
                     <ComboBox x:Name="cbbPayInterest" Foreground="Green" materialDesign:HintAssist.Hint="Trả lãi" materialDesign:HintAssist.IsFloating="True" />
