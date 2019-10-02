@@ -200,8 +200,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="assets\" />
+    <Resource Include="assets\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\bee.png" />
+    <Resource Include="assets\bee3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -29,7 +29,7 @@
         </Grid.RowDefinitions>
         <Image Grid.Row ="1" Source="../assets/logo.png" Height="170" Width="170" />
         <TextBlock Grid.Row ="2" Width="250" Text="Lên kế hoạch tài chính thông minh và từng bước tiết kiệm để hiện thực hóa ước mơ." TextElement.Foreground="White" TextElement.FontSize="10" TextAlignment="Center" FontFamily="Arial" TextWrapping="Wrap"/>
-        <Button x:Name="btnRegister" Grid.Row ="3" Height="50" Width="320" Content="LẦN ĐẦU SỬ DỤNG MONEY LOVER" Background="White" TextElement.Foreground="DarkGreen" TextElement.FontSize="13" Click="btnRegister_Click"/>
-        <Button x:Name="btnSignIn" Grid.Row ="4" Height="50" Width="320" Content="ĐÃ SỬ DỤNG MONEY LOVER" TextElement.Foreground="White" Background="#E25703" BorderBrush="White" TextElement.FontSize="13" Click="btnSignIn_Click"/>
+        <Button x:Name="btnRegister" Grid.Row ="3" Height="50" Width="320" Content="LẦN ĐẦU SỬ DỤNG MONEY LOVER" Background="White" TextElement.Foreground="DarkGreen" TextElement.FontSize="13"/>
+        <Button x:Name="btnSignIn" Grid.Row ="4" Height="50" Width="320" Content="ĐÃ SỬ DỤNG MONEY LOVER" TextElement.Foreground="White" Background="#E25703" BorderBrush="White" TextElement.FontSize="13"/>
     </Grid>
 </Window>

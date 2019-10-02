@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class EditeditPassBook : Services.PassBookService
+    public class EditeditPassBook : Validates.PassBookValidate
     {
         private Views.EditPassBook editPassBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
