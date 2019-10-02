@@ -42,6 +42,7 @@
           Padding="16">
             <DockPanel>
                 <Button
+                  x:Name="btnClose"
                   VerticalAlignment="Center" TextElement.Foreground="White"
                   Style="{StaticResource MaterialDesignFlatButton}"
                   Content="{materialDesign:PackIcon Kind=WindowClose}"
@@ -70,17 +71,17 @@
                 <ColumnDefinition Width="220"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btnCancel" HorizontalAlignment="Left" Foreground="#2DB84C" Background="White" BorderBrush="Green" BorderThickness="1" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Grid.Column="2">
-                CANCEL
+                Hủy
             </Button>
             <Button x:Name="btnSave"  HorizontalAlignment="Right" Foreground="#2DB84C" Background="White" BorderBrush="Green" BorderThickness="1" Width="100" Style="{StaticResource MaterialDesignFlatButton}">
-                SAVE
+                Lưu
             </Button>
         </Grid>
         <materialDesign:Card Grid.Row="1" Background="White" Margin="15">
             <Grid Grid.Row="1">
                 <StackPanel Margin="15" HorizontalAlignment="Center" Grid.Column="0">
-                    <TextBox  Foreground="Green" materialDesign:HintAssist.Hint="Tên ngân hàng" materialDesign:HintAssist.IsFloating="True" />
-                    <TextBox  Foreground="Green" materialDesign:HintAssist.Hint="Ghi chú" materialDesign:HintAssist.IsFloating="True" />
+                    <TextBox x:Name="txtBankName" Foreground="Green" materialDesign:HintAssist.Hint="Tên ngân hàng" materialDesign:HintAssist.IsFloating="True" />
+                    <TextBox x:Name="txtShortName" Foreground="Green" materialDesign:HintAssist.Hint="Tên rút gọn" materialDesign:HintAssist.IsFloating="True" />
 
 
                 </StackPanel>
@@ -94,18 +95,19 @@
                       Style="{DynamicResource MaterialDesignGroupBox}"
                       Margin="10"
                       materialDesign:ColorZoneAssist.Mode="PrimaryDark">
-                        <ListView>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Code}"        
-                                                    Header="Id" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Name}"        
-                                                    Header="Tên ngân hàng" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Description}"
-                                                    Header="Ghi Chú" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <Grid>
+                            <DataGrid x:Name="dtgridListBank">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding BankID}" 
+                                                        Width="50"
+                                                        Header="ID" />
+                                    <DataGridTextColumn Binding="{Binding BankName}"        
+                                                        Header="Tên ngân hàng" />
+                                    <DataGridTextColumn Binding="{Binding ShortName}"
+                                                        Header="Tên rút gọn" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
                     </GroupBox>
 
                 </StackPanel>

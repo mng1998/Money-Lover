@@ -23,10 +23,5 @@ namespace MoneyLover.UI.Views
         {
             InitializeComponent();
         }
-
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

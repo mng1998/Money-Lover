@@ -46,6 +46,7 @@
           Padding="16">
             <DockPanel>
                 <Button
+                  x:Name="btnClose"
                   VerticalAlignment="Center" TextElement.Foreground="White"
                   Style="{StaticResource MaterialDesignFlatButton}"
                   Content="{materialDesign:PackIcon Kind=WindowClose}"

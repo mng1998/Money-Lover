@@ -7,10 +7,12 @@ using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class PassBook
+    public class PassBook : Services.PassBookService
     {
-        private Views.PassBook passBook;
+        public Views.PassBook passBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        private Bank bank;
+
         private Dictionary<int, string> term = new Dictionary<int, string>
         {
             { 99, "Không thời hạn" },
@@ -34,7 +36,7 @@ namespace MoneyLover.UI.ViewModels
             { 3, "Tất toán sổ" }
         };
 
-        public PassBook()
+        public PassBook(PassbookList pblist)
         {
             passBook = new Views.PassBook();
             Models.User current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
@@ -85,41 +87,29 @@ namespace MoneyLover.UI.ViewModels
                     db.SaveChanges();
                 }
             };
-        }
 
-        public void Show()
-        {
-            passBook.Show();
-        }
-
-        private bool IsDateBeforeOrToday(string input)
-        {
-            DateTime pDate = DateTime.Parse(input);
-            if (pDate <= DateTime.Now)
-                return true;
-            else
+            passBook.btnAddBank.Click += (sender, e) =>
             {
-                MessageBox.Show("Ngày gửi phải bé hơn hoặc bằng ngày hiện tại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-        }
+                bank = new Bank(this);
+                bank.ShowDialog();
+            };
 
-        private bool ValidateDeposit(double deposit)
-        {
-            if (deposit < 1000000)
+            passBook.btnCancel.Click += (sender, e) =>
             {
-                MessageBox.Show("Số tiền gửi tối thiểu là 1.000.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            else return true;
+                passBook.Close();
+            };
+
+            passBook.btnClose.Click += (sender, e) =>
+            {
+                passBook.Close();
+                pblist.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
+                pblist.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
+            }; 
         }
 
-        private double GetIndefiniteTerm(double IndefiniteTerm)
+        public void ShowDialog()
         {
-            if (IndefiniteTerm == 0)
-                return 0.05;
-            else
-                return IndefiniteTerm;
+            passBook.ShowDialog();
         }
     }
 }
