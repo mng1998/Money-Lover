@@ -78,6 +78,8 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\PassBookService.cs" />
+    <Compile Include="Validates\AccountValidate.cs" />
+    <Compile Include="Validates\PassBookValidate.cs" />
     <Compile Include="ViewModels\AddToPassBook.cs" />
     <Compile Include="ViewModels\Bank.cs" />
     <Compile Include="ViewModels\EditPassBook.cs" />

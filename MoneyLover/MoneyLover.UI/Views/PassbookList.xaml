@@ -16,7 +16,8 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="PassbookList">
+        Title="PassbookList"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

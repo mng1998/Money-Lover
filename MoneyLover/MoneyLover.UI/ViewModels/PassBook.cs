@@ -7,11 +7,13 @@ using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class PassBook : Services.PassBookService
+    public class PassBook : Validates.PassBookValidate
     {
         public Views.PassBook passBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
         private Bank bank;
+
+        private Services.PassBookService pbService;
 
         private Dictionary<int, string> term = new Dictionary<int, string>
         {
@@ -39,6 +41,7 @@ namespace MoneyLover.UI.ViewModels
         public PassBook(PassbookList pblist)
         {
             passBook = new Views.PassBook();
+            pbService = new Services.PassBookService();
             Models.User current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
 
             passBook.cbbBank.ItemsSource = db.Banks.ToList();
@@ -70,21 +73,15 @@ namespace MoneyLover.UI.ViewModels
 
                 if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(passBook.txtDeposit.Text)))
                 {
-                    db.PassBooks.Add(new Models.PassBook
-                    {
-                        BankID = BankID,
-                        Deposit = Convert.ToDouble(passBook.txtDeposit.Text),
-                        Due = dueKey,
-                        IndefiniteTerm = GetIndefiniteTerm(Convert.ToDouble(passBook.txtIndefiniteTerm.Text)),
-                        Term = TermKey,
-                        PayInterest = payInterestKey,
-                        SentDate = DateTime.Parse(passBook.dpDate.Text),
-                        UserID = current_user.UserID,
-                        InterestRates = Convert.ToDouble(passBook.txtInterestRates.Text),
-                        Settlement = false
-                    });
-
-                    db.SaveChanges();
+                    pbService.Create(BankID, 
+                                     Convert.ToDouble(passBook.txtDeposit.Text), 
+                                     dueKey, 
+                                     GetIndefiniteTerm(Convert.ToDouble(passBook.txtIndefiniteTerm.Text)), 
+                                     TermKey, 
+                                     payInterestKey, 
+                                     DateTime.Parse(passBook.dpDate.Text), 
+                                     current_user.UserID, 
+                                     Convert.ToDouble(passBook.txtInterestRates.Text));
                 }
             };
 

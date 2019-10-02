@@ -30,6 +30,7 @@ namespace MoneyLover.UI.Models
         public double IndefiniteTerm { get; set; }
         public int PayInterest { get; set; }
         public int Due { get; set; }
+        public double WithDrawalMoney { get; set; }
         public bool Settlement { get; set; }
     }
 }
