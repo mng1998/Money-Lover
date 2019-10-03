@@ -6,9 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"        
         TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
         TextElement.FontFamily="Arial"
-        Background="#EEEEEE"
+        Background="#BFC3C5"
         Height="600" Width="350"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -20,12 +19,16 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="320"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="Green"/>
         </Style>
         <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="320"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#a9a9a9 "/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -55,11 +58,11 @@
                     ToolTip="Thoát" />
                         
             <TextBlock Grid.Row="2" Text="Đăng nhập bằng email" TextElement.Foreground="Black" TextElement.FontSize="28" TextAlignment="Center" FontFamily="Arial"/>
-            <TextBox x:Name="txtEmail" Grid.Row="3" Foreground="Green" materialDesign:HintAssist.Hint="Email"  materialDesign:HintAssist.IsFloating="True" />
-            <PasswordBox x:Name="psdPassword" Grid.Row="4" Foreground="Green" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True"/>
-            <Button x:Name="btnSignIn" Grid.Row ="5" Height="50" Width="320" Content="ĐĂNG NHẬP" Background="#2DB84C" TextElement.Foreground="White" TextElement.FontSize="13"/>
+            <TextBox x:Name="txtEmail" Grid.Row="3" materialDesign:HintAssist.Hint="Email"  materialDesign:HintAssist.IsFloating="True" />
+            <PasswordBox x:Name="psdPassword" Grid.Row="4" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True"/>
+            <Button x:Name="btnSignIn" Grid.Row ="5" Height="50" Width="320" Content="ĐĂNG NHẬP" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold"/>
             <Button x:Name="btnRegister" Grid.Row ="8" Height="30" Content="ĐĂNG KÝ" 
-                    TextElement.Foreground="Green" TextElement.FontSize="12"
+                    TextElement.Foreground="Green" TextElement.FontSize="10" TextElement.FontWeight="Bold"
                     Style="{StaticResource MaterialDesignFlatButton}"/>
             
         </Grid>
