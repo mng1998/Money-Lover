@@ -10,16 +10,14 @@ namespace MoneyLover.UI.ViewModels
     {
         private Views.PartialWithdrawal partialWithdrawal;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        private Models.PassBook passBook;
 
         public PartialWithdrawal(PassbookList pbList, Models.PassBook pb)
         {
             partialWithdrawal = new Views.PartialWithdrawal();
+            passBook = pb;
 
-            partialWithdrawal.txtPassBookID.Text += pb.PassBookID.ToString();
-            partialWithdrawal.txtSentDate.Text = pb.SentDate.ToString();
-            partialWithdrawal.txtTerm.Text = pb.Term.ToString();
-            partialWithdrawal.txtInterestRates.Text = pb.InterestRates.ToString();
-            partialWithdrawal.txtDeposit.Text = pb.Deposit.ToString();
+            placeData();
 
             partialWithdrawal.btnSave.Click += (sender, e) =>
             {
@@ -34,9 +32,18 @@ namespace MoneyLover.UI.ViewModels
             partialWithdrawal.btnClose.Click += (sender, e) =>
             {
                 partialWithdrawal.Close();
-                pbList.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pbList.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
+                pbList.ShowDataGrid(true);
             };
+        }
+
+        public void placeData()
+        {
+            partialWithdrawal.txtPassBookID.Text = "#" + passBook.PassBookID.ToString();
+            partialWithdrawal.txtSentDate.Text = passBook.SentDate.ToString();
+            partialWithdrawal.txtTerm.Text = passBook.Term.ToString();
+            partialWithdrawal.txtInterestRates.Text = passBook.InterestRates.ToString();
+            partialWithdrawal.txtDeposit.Text = passBook.Deposit.ToString();
+            partialWithdrawal.txtEndDate.Text = passBook.EndDate.ToString();
         }
 
         public void ShowDialog()

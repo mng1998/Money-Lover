@@ -10,16 +10,14 @@ namespace MoneyLover.UI.ViewModels
     {
         private Views.AddToPassBook addToPassBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        private Models.PassBook passBook;
 
         public AddToPassBook(PassbookList pbList, Models.PassBook pb)
         {
             addToPassBook = new Views.AddToPassBook();
+            passBook = pb;
 
-            addToPassBook.txtPassBookID.Text += pb.PassBookID.ToString();
-            addToPassBook.txtSentDate.Text = pb.SentDate.ToString();
-            addToPassBook.txtTerm.Text = pb.Term.ToString();
-            addToPassBook.txtInterestRates.Text = pb.InterestRates.ToString();
-            addToPassBook.txtDeposit.Text = pb.Deposit.ToString();
+            placeData();
 
             addToPassBook.btnSave.Click += (sender, e) =>
             {
@@ -34,9 +32,18 @@ namespace MoneyLover.UI.ViewModels
             addToPassBook.btnClose.Click += (sender, e) =>
             {
                 addToPassBook.Close();
-                pbList.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pbList.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
+                pbList.ShowDataGrid(true);
             };
+        }
+
+        public void placeData()
+        {
+            addToPassBook.txtDeposit.Text = passBook.Deposit.ToString();
+            addToPassBook.txtInterestRates.Text = passBook.InterestRates.ToString();
+            addToPassBook.txtSentDate.Text = passBook.SentDate.ToString();
+            addToPassBook.txtEndDate.Text = passBook.EndDate.ToString();
+            addToPassBook.txtPassBookID.Text = "#" + passBook.GetID;
+            addToPassBook.txtTerm.Text = passBook.Term.ToString();
         }
 
         public void ShowDialog()

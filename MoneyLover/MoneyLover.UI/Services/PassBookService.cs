@@ -10,9 +10,9 @@ namespace MoneyLover.UI.Services
     public class PassBookService
     {
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
-        public void Create(int bankID, double deposit, int due, double indefiniteTerm, int term, int payInterest, DateTime sentDate, int userID, double interestRates)
+        public Models.PassBook Create(int bankID, double deposit, int due, double indefiniteTerm, int term, int payInterest, DateTime sentDate, int userID, double interestRates)
         {
-            db.PassBooks.Add(new Models.PassBook
+            Models.PassBook pb = new Models.PassBook
             {
                 BankID = bankID,
                 Deposit = deposit,
@@ -26,9 +26,12 @@ namespace MoneyLover.UI.Services
                 InterestRates = interestRates,
                 WithDrawalMoney = getWithDrawalMoney(deposit, interestRates, term),
                 Settlement = false
-            });
+            };
 
+            db.PassBooks.Add(pb);
             db.SaveChanges();
+
+            return pb;
         }
 
         public DateTime getEndDate(DateTime SentDate, int Term)

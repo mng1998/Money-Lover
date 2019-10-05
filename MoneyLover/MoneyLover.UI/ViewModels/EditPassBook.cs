@@ -7,10 +7,11 @@ using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class EditeditPassBook : Validates.PassBookValidate
+    public class EditPassBook : Validates.PassBookValidate
     {
         private Views.EditPassBook editPassBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        private Models.PassBook passBook;
 
         private Dictionary<int, string> term = new Dictionary<int, string>
         {
@@ -35,10 +36,12 @@ namespace MoneyLover.UI.ViewModels
             { 3, "Tất toán sổ" }
         };
 
-        public EditeditPassBook(PassbookList pblist, Models.PassBook pb)
+        public EditPassBook(PassbookList pbList, Models.PassBook pb)
         {
             editPassBook = new Views.EditPassBook();
+            passBook = pb;
             Models.User current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
+            placeData();
 
             editPassBook.cbbBank.ItemsSource = db.Banks.ToList();
             editPassBook.cbbBank.SelectedValuePath = "BankID";
@@ -59,7 +62,7 @@ namespace MoneyLover.UI.ViewModels
             editPassBook.cbbDue.SelectedValuePath = "Keys";
             editPassBook.cbbDue.DisplayMemberPath = "Value";
             editPassBook.cbbDue.SelectedIndex = 0;
-
+            
 
             editPassBook.btnSave.Click += (sender, e) =>
             {
@@ -90,16 +93,26 @@ namespace MoneyLover.UI.ViewModels
             editPassBook.btnCancel.Click += (sender, e) =>
             {
                 editPassBook.Close();
-                pblist.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pblist.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
+                pbList.ShowDataGrid(true);
             };
 
             editPassBook.btnClose.Click += (sender, e) =>
             {
                 editPassBook.Close();
-                pblist.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pblist.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
+                pbList.ShowDataGrid(true);
             };
+        }
+
+        public void placeData()
+        {
+            editPassBook.txtDeposit.Text = passBook.Deposit.ToString();
+            editPassBook.txtIndefiniteTerm.Text = passBook.IndefiniteTerm.ToString();
+            editPassBook.txtInterestRates.Text = passBook.InterestRates.ToString();
+            editPassBook.dpDate.Text = passBook.SentDate.ToString();
+            editPassBook.cbbBank.SelectedIndex = passBook.BankID;
+            editPassBook.cbbDue.SelectedIndex = passBook.Due;
+            editPassBook.cbbPayInterest.SelectedIndex = passBook.PayInterest;
+            editPassBook.cbbTerm.SelectedIndex = passBook.Term;
         }
 
         public void ShowDialog()

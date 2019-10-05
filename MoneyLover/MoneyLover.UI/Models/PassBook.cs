@@ -32,5 +32,21 @@ namespace MoneyLover.UI.Models
         public int Due { get; set; }
         public double WithDrawalMoney { get; set; }
         public bool Settlement { get; set; }
+        public string GetID { get => Bank.GetBankName(BankID) + "_" + PassBookID; }
+
+        public static List<PassBook> getListPassBook(int UserID, int BankID)
+        {
+            using (var db = new DB.MoneyLoverDB())
+            {
+                return db.PassBooks.Where(m => m.UserID == UserID && m.BankID == BankID && m.Settlement == false).ToList();
+            }
+        }
+        public static List<PassBook> getListPassBookSettlement(int UserID)
+        {
+            using (var db = new DB.MoneyLoverDB())
+            {
+                return db.PassBooks.Where(m => m.UserID == UserID && m.Settlement == true).ToList();
+            }
+        }
     }
 }

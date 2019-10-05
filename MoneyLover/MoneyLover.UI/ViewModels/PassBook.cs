@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MoneyLover.UI.ViewModels
 {
     public class PassBook : Validates.PassBookValidate
     {
         public Views.PassBook passBook;
-        private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
         private Bank bank;
+        private Models.User current_user;
 
         private Services.PassBookService pbService;
 
@@ -38,31 +39,34 @@ namespace MoneyLover.UI.ViewModels
             { 3, "Tất toán sổ" }
         };
 
-        public PassBook(PassbookList pblist)
+        public PassBook(PassbookList pbList)
         {
-            passBook = new Views.PassBook();
-            pbService = new Services.PassBookService();
-            Models.User current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
+            using (var db = new DB.MoneyLoverDB())
+            {
+                passBook = new Views.PassBook();
+                pbService = new Services.PassBookService();
+                current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
 
-            passBook.cbbBank.ItemsSource = db.Banks.ToList();
-            passBook.cbbBank.SelectedValuePath = "BankID";
-            passBook.cbbBank.DisplayMemberPath = "BankName";
-            passBook.cbbBank.SelectedIndex = 0;
+                passBook.cbbBank.ItemsSource = db.Banks.ToList();
+                passBook.cbbBank.SelectedValuePath = "BankID";
+                passBook.cbbBank.DisplayMemberPath = "BankName";
+                passBook.cbbBank.SelectedIndex = 0;
 
-            passBook.cbbTerm.ItemsSource = term;
-            passBook.cbbTerm.SelectedValuePath = "Keys";
-            passBook.cbbTerm.DisplayMemberPath = "Value";
-            passBook.cbbTerm.SelectedIndex = 0;
+                passBook.cbbTerm.ItemsSource = term;
+                passBook.cbbTerm.SelectedValuePath = "Keys";
+                passBook.cbbTerm.DisplayMemberPath = "Value";
+                passBook.cbbTerm.SelectedIndex = 0;
 
-            passBook.cbbPayInterest.ItemsSource = payInterest;
-            passBook.cbbPayInterest.SelectedValuePath = "Keys";
-            passBook.cbbPayInterest.DisplayMemberPath = "Value";
-            passBook.cbbPayInterest.SelectedIndex = 0;
+                passBook.cbbPayInterest.ItemsSource = payInterest;
+                passBook.cbbPayInterest.SelectedValuePath = "Keys";
+                passBook.cbbPayInterest.DisplayMemberPath = "Value";
+                passBook.cbbPayInterest.SelectedIndex = 0;
 
-            passBook.cbbDue.ItemsSource = due;
-            passBook.cbbDue.SelectedValuePath = "Keys";
-            passBook.cbbDue.DisplayMemberPath = "Value";
-            passBook.cbbDue.SelectedIndex = 0;
+                passBook.cbbDue.ItemsSource = due;
+                passBook.cbbDue.SelectedValuePath = "Keys";
+                passBook.cbbDue.DisplayMemberPath = "Value";
+                passBook.cbbDue.SelectedIndex = 0;
+            }
 
             passBook.btnSave.Click += (sender, e) =>
             {
@@ -70,10 +74,11 @@ namespace MoneyLover.UI.ViewModels
                 int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbTerm.SelectedItem).Key);
                 int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbPayInterest.SelectedItem).Key);
                 int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbDue.SelectedItem).Key);
+                string ShortNameBank = Models.Bank.GetBankName(BankID);
 
                 if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(passBook.txtDeposit.Text)))
                 {
-                    pbService.Create(BankID, 
+                    Models.PassBook pb = pbService.Create(BankID, 
                                      Convert.ToDouble(passBook.txtDeposit.Text), 
                                      dueKey, 
                                      GetIndefiniteTerm(Convert.ToDouble(passBook.txtIndefiniteTerm.Text)), 
@@ -82,6 +87,12 @@ namespace MoneyLover.UI.ViewModels
                                      DateTime.Parse(passBook.dpDate.Text), 
                                      current_user.UserID, 
                                      Convert.ToDouble(passBook.txtInterestRates.Text));
+
+                    DataGrid dtgrid = (DataGrid)pbList.passBookList.FindName(ShortNameBank);
+                    if (dtgrid == null)
+                        pbList.ShowPassBookList(ShortNameBank, Models.PassBook.getListPassBook(current_user.UserID, BankID), false);
+                    else
+                        pbList.ShowPassBookList(ShortNameBank, Models.PassBook.getListPassBook(current_user.UserID, BankID), true);
                 }
             };
 
@@ -99,8 +110,6 @@ namespace MoneyLover.UI.ViewModels
             passBook.btnClose.Click += (sender, e) =>
             {
                 passBook.Close();
-                pblist.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pblist.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
             }; 
         }
 
