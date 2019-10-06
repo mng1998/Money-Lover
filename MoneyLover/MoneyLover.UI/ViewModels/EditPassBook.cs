@@ -66,6 +66,8 @@ namespace MoneyLover.UI.ViewModels
 
             editPassBook.btnSave.Click += (sender, e) =>
             {
+                Models.PassBook targetPb = db.PassBooks.Find(pb.PassBookID);
+
                 int BankID = Convert.ToInt32(editPassBook.cbbBank.SelectedValue);
                 int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbTerm.SelectedItem).Key);
                 int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbPayInterest.SelectedItem).Key);
@@ -73,33 +75,31 @@ namespace MoneyLover.UI.ViewModels
 
                 if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(editPassBook.txtDeposit.Text)))
                 {
-                    pb.BankID = BankID;
-                    pb.Deposit = Convert.ToDouble(editPassBook.txtDeposit.Text);
-                    pb.Due = dueKey;
-                    pb.IndefiniteTerm = GetIndefiniteTerm(Convert.ToDouble(editPassBook.txtIndefiniteTerm.Text));
-                    pb.Term = TermKey;
-                    pb.PayInterest = payInterestKey;
-                    pb.SentDate = DateTime.Parse(editPassBook.dpDate.Text);
-                    pb.UserID = current_user.UserID;
-                    pb.InterestRates = Convert.ToDouble(editPassBook.txtInterestRates.Text);
-                    pb.Settlement = false;
-
-                    // xử lý tính toán
+                    targetPb.BankID = BankID;
+                    targetPb.Deposit = Convert.ToDouble(editPassBook.txtDeposit.Text);
+                    targetPb.Due = dueKey;
+                    targetPb.IndefiniteTerm = GetIndefiniteTerm(editPassBook.txtIndefiniteTerm.Text);
+                    targetPb.Term = TermKey;
+                    targetPb.PayInterest = payInterestKey;
+                    targetPb.SentDate = DateTime.Parse(editPassBook.dpDate.Text);
+                    targetPb.EndDate = DateTime.Parse(editPassBook.dpDate.Text).AddMonths(TermKey);
+                    targetPb.UserID = current_user.UserID;
+                    targetPb.InterestRates = Convert.ToDouble(editPassBook.txtInterestRates.Text);
+                    targetPb.Settlement = false;
 
                     db.SaveChanges();
+                    pbList.ShowDataGrid();
                 }
             };
 
             editPassBook.btnCancel.Click += (sender, e) =>
             {
                 editPassBook.Close();
-                pbList.ShowDataGrid(true);
             };
 
             editPassBook.btnClose.Click += (sender, e) =>
             {
                 editPassBook.Close();
-                pbList.ShowDataGrid(true);
             };
         }
 

@@ -74,25 +74,21 @@ namespace MoneyLover.UI.ViewModels
                 int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbTerm.SelectedItem).Key);
                 int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbPayInterest.SelectedItem).Key);
                 int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbDue.SelectedItem).Key);
-                string ShortNameBank = Models.Bank.GetBankName(BankID);
+                Models.Bank Bank = Models.Bank.GetBank(BankID);
 
                 if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(passBook.txtDeposit.Text)))
                 {
                     Models.PassBook pb = pbService.Create(BankID, 
                                      Convert.ToDouble(passBook.txtDeposit.Text), 
                                      dueKey, 
-                                     GetIndefiniteTerm(Convert.ToDouble(passBook.txtIndefiniteTerm.Text)), 
+                                     GetIndefiniteTerm(passBook.txtIndefiniteTerm.Text), 
                                      TermKey, 
                                      payInterestKey, 
                                      DateTime.Parse(passBook.dpDate.Text), 
                                      current_user.UserID, 
                                      Convert.ToDouble(passBook.txtInterestRates.Text));
-
-                    DataGrid dtgrid = (DataGrid)pbList.passBookList.FindName(ShortNameBank);
-                    if (dtgrid == null)
-                        pbList.ShowPassBookList(ShortNameBank, Models.PassBook.getListPassBook(current_user.UserID, BankID), false);
-                    else
-                        pbList.ShowPassBookList(ShortNameBank, Models.PassBook.getListPassBook(current_user.UserID, BankID), true);
+                    
+                   pbList.ShowPassBookList(Bank, Models.PassBook.getListPassBook(current_user.UserID, BankID));
                 }
             };
 

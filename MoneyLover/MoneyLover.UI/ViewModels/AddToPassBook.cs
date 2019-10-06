@@ -21,7 +21,7 @@ namespace MoneyLover.UI.ViewModels
 
             addToPassBook.btnSave.Click += (sender, e) =>
             {
-                Models.PassBook passBook = db.PassBooks.Where(m => m.PassBookID == pb.PassBookID).FirstOrDefault();
+                Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
                 passBook.Deposit += Convert.ToDouble(addToPassBook.txtAddMoreDeposit.Text);
 
                 // Xử lý tính toán ở đây
@@ -32,7 +32,7 @@ namespace MoneyLover.UI.ViewModels
             addToPassBook.btnClose.Click += (sender, e) =>
             {
                 addToPassBook.Close();
-                pbList.ShowDataGrid(true);
+                pbList.ShowDataGrid();
             };
         }
 
@@ -40,8 +40,8 @@ namespace MoneyLover.UI.ViewModels
         {
             addToPassBook.txtDeposit.Text = passBook.Deposit.ToString();
             addToPassBook.txtInterestRates.Text = passBook.InterestRates.ToString();
-            addToPassBook.txtSentDate.Text = passBook.SentDate.ToString();
-            addToPassBook.txtEndDate.Text = passBook.EndDate.ToString();
+            addToPassBook.txtSentDate.Text = passBook.SentDate.ToString("dd/MM/yyyy");
+            addToPassBook.txtEndDate.Text = passBook.EndDate.ToString("dd/MM/yyyy");
             addToPassBook.txtPassBookID.Text = "#" + passBook.GetID;
             addToPassBook.txtTerm.Text = passBook.Term.ToString();
         }

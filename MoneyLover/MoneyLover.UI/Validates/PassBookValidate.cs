@@ -31,12 +31,22 @@ namespace MoneyLover.UI.Validates
             else return true;
         }
 
-        public double GetIndefiniteTerm(double IndefiniteTerm)
+        public double ValidateAddDeposit(double deposit)
         {
-            if (IndefiniteTerm == 0)
+            if (deposit < 100000)
+            {
+                MessageBox.Show("Số tiền gửi thêm tối thiểu là 100.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return 0;
+            }
+            else return deposit;
+        }
+
+        public double GetIndefiniteTerm(string IndefiniteTerm)
+        {
+            if (IndefiniteTerm == "")
                 return 0.05;
             else
-                return IndefiniteTerm;
+                return Convert.ToDouble(IndefiniteTerm);
         }
     }
 }

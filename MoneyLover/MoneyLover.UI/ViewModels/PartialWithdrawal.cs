@@ -32,7 +32,7 @@ namespace MoneyLover.UI.ViewModels
             partialWithdrawal.btnClose.Click += (sender, e) =>
             {
                 partialWithdrawal.Close();
-                pbList.ShowDataGrid(true);
+                pbList.ShowDataGrid();
             };
         }
 

@@ -24,17 +24,21 @@ namespace MoneyLover.UI.ViewModels
             withDrawal.btnSettlement.Click += (sender, e) =>
             {
                 Models.PassBook passBook = db.PassBooks.Where(m => m.PassBookID == pb.PassBookID).FirstOrDefault();
+                Models.User targetUser = db.Users.Find(passBook.UserID);
+                targetUser.Wallet += Convert.ToDouble(withDrawal.txtTotalMoney.Text);
                 passBook.Settlement = true;
+
                 db.SaveChanges();
+
                 withDrawal.Close();
-                pbList.ShowDataGrid(true);
+                pbList.ShowDataGrid();
                 pbList.passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
+                pbList.LoadHeaderSettlement();
             };
 
             withDrawal.btnClose.Click += (sender, e) =>
             {
                 withDrawal.Close();
-                pbList.ShowDataGrid(true);
             };
         }
 
@@ -46,7 +50,11 @@ namespace MoneyLover.UI.ViewModels
             withDrawal.txtInterestRates.Text = passBook.InterestRates.ToString();
             withDrawal.txtDeposit.Text = passBook.Deposit.ToString();
             withDrawal.txtEndDate.Text = passBook.EndDate.ToString();
-            withDrawal.txtTotalMoney.Text = "Chưa xử lý";
+
+            if (passBook.EndDate <= DateTime.Now)
+                withDrawal.txtTotalMoney.Text = (passBook.Deposit + (passBook.Deposit * (passBook.InterestRates / 100) * passBook.Term) / 12).ToString();
+            else
+                withDrawal.txtTotalMoney.Text = (passBook.Deposit + (passBook.Deposit * (passBook.IndefiniteTerm / 100) * passBook.Term) / 12).ToString();
         }
 
         public void ShowDialog()

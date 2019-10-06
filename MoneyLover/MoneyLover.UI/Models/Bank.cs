@@ -15,11 +15,11 @@ namespace MoneyLover.UI.Models
         public string ShortName { get; set; }
         public ICollection<PassBook> PassBooks { get; set; }
 
-        public static string GetBankName(int id)
+        public static Bank GetBank(int id)
         {
             using (var db = new DB.MoneyLoverDB())
             {
-                return db.Banks.Find(id).ShortName;
+                return db.Banks.Find(id);
             }
         }
     }

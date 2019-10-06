@@ -84,6 +84,7 @@
     <Compile Include="ViewModels\Bank.cs" />
     <Compile Include="ViewModels\EditPassBook.cs" />
     <Compile Include="ViewModels\MainWindow.cs" />
+    <Compile Include="ViewModels\Menu.cs" />
     <Compile Include="ViewModels\PartialWithdrawal.cs" />
     <Compile Include="ViewModels\PassBook.cs" />
     <Compile Include="ViewModels\PassbookList.cs" />

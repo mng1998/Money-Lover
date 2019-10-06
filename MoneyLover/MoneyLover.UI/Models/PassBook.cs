@@ -32,7 +32,7 @@ namespace MoneyLover.UI.Models
         public int Due { get; set; }
         public double WithDrawalMoney { get; set; }
         public bool Settlement { get; set; }
-        public string GetID { get => Bank.GetBankName(BankID) + "_" + PassBookID; }
+        public string GetID { get => Bank.GetBank(BankID).ShortName + "_" + PassBookID; }
 
         public static List<PassBook> getListPassBook(int UserID, int BankID)
         {
@@ -47,6 +47,44 @@ namespace MoneyLover.UI.Models
             {
                 return db.PassBooks.Where(m => m.UserID == UserID && m.Settlement == true).ToList();
             }
+        }
+
+        public static int CountPassBook(int UserID, bool settlement)
+        {
+            using (var db = new DB.MoneyLoverDB())
+            {
+                return db.PassBooks.Where(m => m.UserID == UserID && m.Settlement == settlement).Count();
+            }
+        }
+
+        public static double TotalMoneyPassBook(int UserID, bool settlement)
+        {
+            double result = 0;
+            using (var db = new DB.MoneyLoverDB())
+            {
+                List<PassBook> passbooks = db.PassBooks.Where(m => m.UserID == UserID && m.Settlement == settlement).ToList();
+                foreach(var pb in passbooks)
+                {
+                    result += pb.Deposit;
+                }
+            }
+
+            return result;
+        }
+
+        public static double TotalMoneyPassBookOfBank(int UserID, int BankID, bool settlement)
+        {
+            double result = 0;
+            using (var db = new DB.MoneyLoverDB())
+            {
+                List<PassBook> passbooks = db.PassBooks.Where(m => m.UserID == UserID && m.BankID == BankID && m.Settlement == settlement).ToList();
+                foreach (var pb in passbooks)
+                {
+                    result += pb.Deposit;
+                }
+            }
+
+            return result;
         }
     }
 }

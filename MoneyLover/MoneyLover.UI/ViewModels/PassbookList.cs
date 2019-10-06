@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,8 @@ namespace MoneyLover.UI.ViewModels
         {
             passBookList = new Views.PassbookList();
 
-            ShowDataGrid(false);
+            ShowDataGrid();
+            LoadHeaderSettlement();
             passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
 
             passBookList.btnAddPassBook.Click += (sender, e) =>
@@ -33,9 +35,9 @@ namespace MoneyLover.UI.ViewModels
             passBookList.btnEditPassBook.Click += (sender, e) =>
             {
                 try
-                { 
-                EditPassBook editPassBook = new EditPassBook(this, lastSelectedItem);
-                editPassBook.ShowDialog();
+                {
+                    EditPassBook editPassBook = new EditPassBook(this, lastSelectedItem);
+                    editPassBook.ShowDialog();
                 }
                 catch { }
             };
@@ -63,9 +65,20 @@ namespace MoneyLover.UI.ViewModels
             passBookList.btnWithDrawal.Click += (sender, e) =>
             {
                 try
-                { 
+                {
                     PartialWithdrawal partialWithDrawal = new PartialWithdrawal(this, lastSelectedItem);
                     partialWithDrawal.ShowDialog();
+                }
+                catch { }
+            };
+
+            passBookList.btnViewPassBook.Click += (sender, e) =>
+            {
+                try
+                {
+                    Models.PassBook pb = (Models.PassBook)passBookList.dtgridSettlement.SelectedItem;
+                    Menu menu = new Menu(pb);
+                    menu.ShowDialog();
                 }
                 catch { }
             };
@@ -82,16 +95,18 @@ namespace MoneyLover.UI.ViewModels
             passBookList.Show();
         }
 
-        public void ShowPassBookList(string BankShortName, List<Models.PassBook> passBook, bool reload)
+        public void ShowPassBookList(Models.Bank Bank, List<Models.PassBook> passBook)
         {
-            if (reload == false)
+            GroupBox groupBox = (GroupBox)passBookList.FindName(Bank.ShortName + Bank.BankID);
+
+            if (groupBox == null && passBook.Count != 0)
             {
                 GroupBox groupBoxBank = new GroupBox();
                 groupBoxBank.Height = 220;
                 groupBoxBank.Style = Application.Current.FindResource("MaterialDesignGroupBox") as Style;
                 groupBoxBank.Margin = new Thickness(16);
                 ColorZoneAssist.SetMode(groupBoxBank, ColorZoneMode.PrimaryDark);
-                groupBoxBank.Header = BankShortName;
+                groupBoxBank.Header = Bank.ShortName + " (" + Models.PassBook.TotalMoneyPassBookOfBank(UserID, Bank.BankID, false) + " đ)";
 
                 Grid grid = new Grid();
                 DataGrid dtgrid = new DataGrid();
@@ -108,20 +123,21 @@ namespace MoneyLover.UI.ViewModels
                 dtgrid.ItemsSource = passBook;
                 grid.Children.Add(dtgrid);
                 groupBoxBank.Content = grid;
-                passBookList.RegisterName(BankShortName, dtgrid);
+                passBookList.RegisterName(Bank.ShortName, dtgrid);
+                passBookList.RegisterName(Bank.ShortName + Bank.BankID, groupBoxBank);
                 passBookList.ListPassBook.Children.Add(groupBoxBank);
             }
             else
             {
-                DataGrid dtgrid = (DataGrid)passBookList.FindName(BankShortName);
+                DataGrid dtgrid = (DataGrid)passBookList.FindName(Bank.ShortName);
                 if (passBook.Count != 0)
-                    dtgrid.ItemsSource = passBook;
-                else
                 {
-                    passBookList.ListPassBook.Children.Remove(dtgrid);
-                    passBookList.UnregisterName(BankShortName);
-                    dtgrid = null;
+                    dtgrid.ItemsSource = passBook;
+                    groupBox.Header = Bank.ShortName + " (" + Models.PassBook.TotalMoneyPassBookOfBank(UserID, Bank.BankID, false) + " đ)";
+                    LoadTextBlockPassBook();
                 }
+                else
+                    RemoveGroupBoxBlank();
 
             }
         }
@@ -139,6 +155,12 @@ namespace MoneyLover.UI.ViewModels
             dtgtextcolumn.Binding = new Binding(binding);
             dtgtextcolumn.IsReadOnly = true;
 
+            if (header == "Ngày mở")
+                dtgtextcolumn.Binding.StringFormat = "dd/MM/yyyy";
+
+            if (header == "Tổng số tiền gốc")
+                dtgtextcolumn.Binding.StringFormat = "#,###";
+
             return dtgtextcolumn;
         }
 
@@ -151,14 +173,49 @@ namespace MoneyLover.UI.ViewModels
             }
         }
 
-        public void ShowDataGrid(bool reload)
+        public void ShowDataGrid()
         {
             using (var db = new DB.MoneyLoverDB())
             {
                 foreach (int BankID in GetListBankOfUser())
                 {
                     var ListPassBookOfBank = db.PassBooks.Where(m => m.Settlement == false && m.UserID == UserID && m.BankID == BankID).ToList();
-                    ShowPassBookList(Models.Bank.GetBankName(BankID), ListPassBookOfBank, reload);
+                    ShowPassBookList(Models.Bank.GetBank(BankID), ListPassBookOfBank);
+                }
+
+                passBookList.txtWallet.Text = "Ví tiền: " + Models.User.GetUser(UserID).Wallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+                LoadTextBlockPassBook();
+            }
+        }
+
+        public void LoadHeaderSettlement()
+        {
+            passBookList.groupBoxSettlement.Header = "Đã tất toán (" + Models.PassBook.CountPassBook(UserID, true).ToString() + " sổ)";
+        }
+
+        public void LoadTextBlockPassBook()
+        {
+            passBookList.txtTotalMoneyPassBook.Text = "Tổng tiền: " + Models.PassBook.TotalMoneyPassBook(UserID, false).ToString() + " (" + Models.PassBook.CountPassBook(UserID, false).ToString() + " sổ)";
+        }
+
+        public void RemoveGroupBoxBlank()
+        {
+            foreach (int BankID in GetListBankOfUser())
+            {
+                Models.Bank bank = Models.Bank.GetBank(BankID);
+                GroupBox groupBox = (GroupBox)passBookList.FindName(bank.ShortName + bank.BankID);
+
+                List<Models.PassBook> pbs = Models.PassBook.getListPassBook(UserID, BankID);
+
+                if (pbs.Count == 0)
+                {
+                    try
+                    {
+                        passBookList.UnregisterName(bank.ShortName + bank.BankID);
+                        passBookList.UnregisterName(bank.ShortName);
+                        passBookList.ListPassBook.Children.Remove(groupBox);
+                    }
+                    catch { }
                 }
             }
         }
