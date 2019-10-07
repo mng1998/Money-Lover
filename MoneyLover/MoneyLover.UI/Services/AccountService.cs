@@ -18,7 +18,7 @@ namespace MoneyLover.UI.Services
                 User checkUser = db.Users.Where(m => m.Email == email).SingleOrDefault();
                 if (checkUser == null)
                 {
-                    db.Users.Add(new User { Email = email, Password = password, Wallet = 0 });
+                    db.Users.Add(new User { Email = email, Password = password, Wallet = 100000000, SavingsWallet = 0 });
                     db.SaveChanges();
                     return true;
                 }

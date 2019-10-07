@@ -23,9 +23,11 @@ namespace MoneyLover.UI.ViewModels
 
             withDrawal.btnSettlement.Click += (sender, e) =>
             {
-                Models.PassBook passBook = db.PassBooks.Where(m => m.PassBookID == pb.PassBookID).FirstOrDefault();
+                Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
                 Models.User targetUser = db.Users.Find(passBook.UserID);
+                
                 targetUser.Wallet += Convert.ToDouble(withDrawal.txtTotalMoney.Text);
+                targetUser.SavingsWallet -= pb.Deposit;
                 passBook.Settlement = true;
 
                 db.SaveChanges();

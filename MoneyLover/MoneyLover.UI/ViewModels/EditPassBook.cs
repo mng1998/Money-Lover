@@ -12,6 +12,7 @@ namespace MoneyLover.UI.ViewModels
         private Views.EditPassBook editPassBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
         private Models.PassBook passBook;
+        private Models.User current_user;
 
         private Dictionary<int, string> term = new Dictionary<int, string>
         {
@@ -40,7 +41,7 @@ namespace MoneyLover.UI.ViewModels
         {
             editPassBook = new Views.EditPassBook();
             passBook = pb;
-            Models.User current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
+            current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
             placeData();
 
             editPassBook.cbbBank.ItemsSource = db.Banks.ToList();
@@ -73,7 +74,7 @@ namespace MoneyLover.UI.ViewModels
                 int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbPayInterest.SelectedItem).Key);
                 int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbDue.SelectedItem).Key);
 
-                if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(editPassBook.txtDeposit.Text)))
+                if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(editPassBook.txtDeposit.Text)))
                 {
                     targetPb.BankID = BankID;
                     targetPb.Deposit = Convert.ToDouble(editPassBook.txtDeposit.Text);

@@ -76,7 +76,7 @@ namespace MoneyLover.UI.ViewModels
                 int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbDue.SelectedItem).Key);
                 Models.Bank Bank = Models.Bank.GetBank(BankID);
 
-                if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(passBook.txtDeposit.Text)))
+                if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(passBook.txtDeposit.Text)))
                 {
                     Models.PassBook pb = pbService.Create(BankID, 
                                      Convert.ToDouble(passBook.txtDeposit.Text), 

@@ -22,8 +22,10 @@ namespace MoneyLover.UI.ViewModels
         {
             passBookList = new Views.PassbookList();
 
+            LoadWithDrawal();
             ShowDataGrid();
             LoadHeaderSettlement();
+
             passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
 
             passBookList.btnAddPassBook.Click += (sender, e) =>
@@ -138,8 +140,9 @@ namespace MoneyLover.UI.ViewModels
                 }
                 else
                     RemoveGroupBoxBlank();
-
             }
+
+            LoadWallet();
         }
 
         private void Dtgrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -183,9 +186,15 @@ namespace MoneyLover.UI.ViewModels
                     ShowPassBookList(Models.Bank.GetBank(BankID), ListPassBookOfBank);
                 }
 
-                passBookList.txtWallet.Text = "Ví tiền: " + Models.User.GetUser(UserID).Wallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+                LoadWallet();
                 LoadTextBlockPassBook();
             }
+        }
+
+        public void LoadWallet()
+        {
+            passBookList.txtWallet.Text = "Ví tiền tiết kiệm: " + Models.User.GetUser(UserID).SavingsWallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+            passBookList.txtSavingsWallet.Text = "Ví tiền mặt: " + Models.User.GetUser(UserID).Wallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
         }
 
         public void LoadHeaderSettlement()
@@ -216,6 +225,25 @@ namespace MoneyLover.UI.ViewModels
                         passBookList.ListPassBook.Children.Remove(groupBox);
                     }
                     catch { }
+                }
+            }
+        }
+
+        public void LoadWithDrawal()
+        {
+            foreach (var pb in Models.PassBook.getPassBooks(UserID))
+            {
+                switch(pb.Due)
+                {
+                    case 1:
+                        Services.WithDrawalService.DueChoice1(pb, Models.User.GetUser(UserID));
+                        break;
+                    case 2:
+                        Services.WithDrawalService.DueChoice2(pb, Models.User.GetUser(UserID));
+                        break;
+                    case 3:
+                        Services.WithDrawalService.DueChoice3(pb, Models.User.GetUser(UserID));
+                        break;
                 }
             }
         }

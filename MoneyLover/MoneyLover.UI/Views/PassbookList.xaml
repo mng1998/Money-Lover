@@ -49,6 +49,14 @@
                         Margin="0"
                         HorizontalAlignment="Center"
                         FontSize="14"/>
+
+                <TextBlock
+                    x:Name="txtSavingsWallet"
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Margin="0"
+                        HorizontalAlignment="Center"
+                        FontSize="14"/>
+                
                 <Viewbox Height="10"/>
 
                 <TextBlock

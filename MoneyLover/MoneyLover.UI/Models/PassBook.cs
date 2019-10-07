@@ -41,6 +41,15 @@ namespace MoneyLover.UI.Models
                 return db.PassBooks.Where(m => m.UserID == UserID && m.BankID == BankID && m.Settlement == false).ToList();
             }
         }
+
+        public static List<PassBook> getPassBooks(int UserID)
+        {
+            using (var db = new DB.MoneyLoverDB())
+            {
+                return db.PassBooks.Where(m => m.UserID == UserID && m.Settlement == false).ToList();
+            }
+        }
+
         public static List<PassBook> getListPassBookSettlement(int UserID)
         {
             using (var db = new DB.MoneyLoverDB())

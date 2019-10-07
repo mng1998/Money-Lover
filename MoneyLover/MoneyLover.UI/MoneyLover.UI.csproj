@@ -78,6 +78,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\PassBookService.cs" />
+    <Compile Include="Services\WithDrawalService.cs" />
     <Compile Include="Validates\AccountValidate.cs" />
     <Compile Include="Validates\PassBookValidate.cs" />
     <Compile Include="ViewModels\AddToPassBook.cs" />

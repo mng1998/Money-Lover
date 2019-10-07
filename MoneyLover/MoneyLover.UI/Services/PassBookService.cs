@@ -28,6 +28,10 @@ namespace MoneyLover.UI.Services
                 Settlement = false
             };
 
+            Models.User user = db.Users.Find(userID);
+            user.SavingsWallet += deposit;
+            user.Wallet -= deposit;
+
             db.PassBooks.Add(pb);
             db.SaveChanges();
 

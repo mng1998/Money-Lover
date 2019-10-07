@@ -21,24 +21,30 @@ namespace MoneyLover.UI.Validates
             }
         }
 
-        public bool ValidateDeposit(double deposit)
+        public bool ValidateDeposit(int UserID, double deposit)
         {
-            if (deposit < 1000000)
+            using (var db = new DB.MoneyLoverDB())
             {
-                MessageBox.Show("Số tiền gửi tối thiểu là 1.000.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
+                if (deposit < 1000000 && deposit < Models.User.GetUser(UserID).Wallet)
+                {
+                    MessageBox.Show("Số tiền gửi tối thiểu là 1.000.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                else return true;
             }
-            else return true;
         }
 
-        public double ValidateAddDeposit(double deposit)
+        public double ValidateAddDeposit(int UserID, double deposit)
         {
-            if (deposit < 100000)
+            using (var db = new DB.MoneyLoverDB())
             {
-                MessageBox.Show("Số tiền gửi thêm tối thiểu là 100.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return 0;
+                if (deposit < 100000 && deposit < Models.User.GetUser(UserID).Wallet)
+                {
+                    MessageBox.Show("Số tiền gửi thêm tối thiểu là 100.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return 0;
+                }
+                else return deposit;
             }
-            else return deposit;
         }
 
         public double GetIndefiniteTerm(string IndefiniteTerm)
