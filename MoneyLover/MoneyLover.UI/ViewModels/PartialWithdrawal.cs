@@ -28,7 +28,7 @@ namespace MoneyLover.UI.ViewModels
 
                 if (pb.Term == 99)
                 {
-                    int day = DateTime.Now.Day - pb.SentDate.Day;
+                    int day = Convert.ToInt32((DateTime.Now - pb.SentDate).TotalDays);
                     if (day > 15)
                     {
                         double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
