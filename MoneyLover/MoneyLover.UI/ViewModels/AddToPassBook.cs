@@ -10,20 +10,18 @@ namespace MoneyLover.UI.ViewModels
     {
         private Views.AddToPassBook addToPassBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        private Models.PassBook passBook;
 
         public AddToPassBook(PassbookList pbList, Models.PassBook pb)
         {
             addToPassBook = new Views.AddToPassBook();
+            passBook = pb;
 
-            addToPassBook.txtPassBookID.Text += pb.PassBookID.ToString();
-            addToPassBook.txtSentDate.Text = pb.SentDate.ToString();
-            addToPassBook.txtTerm.Text = pb.Term.ToString();
-            addToPassBook.txtInterestRates.Text = pb.InterestRates.ToString();
-            addToPassBook.txtDeposit.Text = pb.Deposit.ToString();
+            placeData();
 
             addToPassBook.btnSave.Click += (sender, e) =>
             {
-                Models.PassBook passBook = db.PassBooks.Where(m => m.PassBookID == pb.PassBookID).FirstOrDefault();
+                Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
                 passBook.Deposit += Convert.ToDouble(addToPassBook.txtAddMoreDeposit.Text);
 
                 // Xử lý tính toán ở đây
@@ -34,9 +32,18 @@ namespace MoneyLover.UI.ViewModels
             addToPassBook.btnClose.Click += (sender, e) =>
             {
                 addToPassBook.Close();
-                pbList.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pbList.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
+                pbList.ShowDataGrid();
             };
+        }
+
+        public void placeData()
+        {
+            addToPassBook.txtDeposit.Text = passBook.Deposit.ToString();
+            addToPassBook.txtInterestRates.Text = passBook.InterestRates.ToString();
+            addToPassBook.txtSentDate.Text = passBook.SentDate.ToString("dd/MM/yyyy");
+            addToPassBook.txtEndDate.Text = passBook.EndDate.ToString("dd/MM/yyyy");
+            addToPassBook.txtPassBookID.Text = "#" + passBook.GetID;
+            addToPassBook.txtTerm.Text = passBook.Term.ToString();
         }
 
         public void ShowDialog()

@@ -11,121 +11,123 @@
         TextElement.FontFamily="Arial"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="#EEEEEE"
-        Height="580.191" Width="800"
+        Height="920" Width="800"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="PassbookList">
+        Title="PassbookList"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
+
         <materialDesign:Card>
             <StackPanel Margin="15">
-                <Button x:Name="btnBack" HorizontalAlignment="Left" Height="30" TextElement.Foreground="Black"
-                    Content="{materialDesign:PackIcon Kind=ArrowLeft}"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    ToolTip="Trở về" />
-                <Button x:Name="btnAddPassBook" HorizontalAlignment="Right" Height="30" TextElement.Foreground="Black"
-                    Content="{materialDesign:PackIcon Kind=PlusCircleOutline}"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    ToolTip="Thêm sổ tiết kiệm" />
+                <Grid>
+                    <Button x:Name="btnAddPassBook" HorizontalAlignment="Right" Height="30" 
+                        TextElement.Foreground="Black"
+                        Content="{materialDesign:PackIcon Kind=PlusCircleOutline}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="Thêm sổ tiết kiệm" />
+
+                    <Button x:Name="btnBack" HorizontalAlignment="Left" Height="30" TextElement.Foreground="Black"
+                        Content="{materialDesign:PackIcon Kind=ArrowLeft}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="Trở về" />
+                </Grid>
                 <TextBlock
                         Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                         Margin="0"
                         HorizontalAlignment="Center"
-                        FontSize="28">
-                        SỔ TIẾT KIỆM
-                </TextBlock>
-
-                <Viewbox
-                        Height="10">
-                </Viewbox>
+                        FontSize="28" Text="SỔ TIẾT KIỆM"/>
+                
+                <TextBlock
+                    x:Name="txtWallet"
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Margin="0"
+                        HorizontalAlignment="Center"
+                        FontSize="14"/>
 
                 <TextBlock
+                    x:Name="txtSavingsWallet"
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Margin="0"
+                        HorizontalAlignment="Center"
+                        FontSize="14"/>
+                
+                <Viewbox Height="10"/>
+
+                <TextBlock
+                    x:Name="txtTotalMoneyPassBook"
                         Style="{StaticResource MaterialDesignBody1TextBlock}"
                         TextWrapping="Wrap"
-                        HorizontalAlignment="Center">
-                      Tổng tiền: 130.000.000 (5 sổ)
-                </TextBlock>
+                        HorizontalAlignment="Center"/>
             </StackPanel>
         </materialDesign:Card>
         <Grid Grid.Row="1">
-            <materialDesign:Card>
-                <StackPanel Margin="15">
-                    <GroupBox
-                      Header="Bank Name"
-                      Style="{DynamicResource MaterialDesignGroupBox}"
-                      Margin="16"
-                      materialDesign:ColorZoneAssist.Mode="PrimaryDark">
-                        <Grid>
-                            <DataGrid 
-                                x:Name="dtgridListPassBook"
-                                AutoGenerateColumns="False"
-                                IsReadOnly="True">          
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding PassBookID}"        
-                                                        Header="Mã số"
-                                                        IsReadOnly="True"/>
-                                    <DataGridTextColumn Binding="{Binding Deposit}"        
-                                                        Header="Tổng số tiền gốc"
-                                                        IsReadOnly="True"/>
-                                    <DataGridTextColumn Binding="{Binding Term}"
-                                                        Header="Kỳ hạn gửi"
-                                                        IsReadOnly="True" />
-                                    <DataGridTextColumn Binding="{Binding InterestRates}"        
-                                                        Header="Lãi suất năm"
-                                                        IsReadOnly="True" />
-                                    <DataGridTextColumn Binding="{Binding SentDate, StringFormat=dd-MM-yyyy}"        
-                                                        Header="Ngày mở"
-                                                        IsReadOnly="True" />
-                                    <DataGridTextColumn Header="Chỉnh sửa" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox
-                      Header="Đã tất toán"
-                      Style="{DynamicResource MaterialDesignGroupBox}"
-                      Margin="16"
-                      materialDesign:ColorZoneAssist.Mode="PrimaryDark">
-                        <Grid>
-                            <DataGrid
-                                x:Name="dtgridSettlement"
-                                AutoGenerateColumns="False"
-                                IsReadOnly="True">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding PassBookID}"        
-                                                        Header="Mã số"
-                                                        IsReadOnly="True" />
-                                    <DataGridTextColumn Binding="{Binding Deposit}"        
-                                                        Header="Tổng số tiền gốc"
-                                                        IsReadOnly="True" />
-                                    <DataGridTextColumn Binding="{Binding Term}"
-                                                        Header="Kỳ hạn gửi"
-                                                        IsReadOnly="True" />
-                                    <DataGridTextColumn Binding="{Binding InterestRates}"        
-                                                        Header="Lãi suất năm"
-                                                        IsReadOnly="True" />
-                                    <DataGridTextColumn Binding="{Binding SentDate, StringFormat=dd-MM-yyyy}"        
-                                                        Header="Ngày mở"
-                                                        IsReadOnly="True" />
-                                    <DataGridTemplateColumn Header="Xem"
-                                                        IsReadOnly="True" >
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button x:Name="btnViewSettlement" Content=". . ."/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
-                    </GroupBox>
-                </StackPanel>
-            </materialDesign:Card>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <WrapPanel Grid.Row="0" HorizontalAlignment="Center">
+                    <Button x:Name="btnEditPassBook" Margin="10" Content="CHỈNH SỬA" TextElement.Foreground="Green" Background="White" BorderBrush="Green" TextElement.FontSize="10"/>
+                    <Button x:Name="btnAddMore" Margin="10" Content="GỬI THÊM" TextElement.Foreground="Green" Background="White" BorderBrush="Green" TextElement.FontSize="10"/>
+                    <Button x:Name="btnSettlement" Margin="10" Content="TẤT TOÁN NGAY" TextElement.Foreground="Green" Background="White" BorderBrush="Green" TextElement.FontSize="10"/>
+                    <Button x:Name="btnWithDrawal" Margin="10" Content="RÚT MỘT PHẦN" TextElement.Foreground="Green" Background="White" BorderBrush="Green" TextElement.FontSize="10"/>
+                </WrapPanel>
+
+                <Grid Grid.Row="1" x:Name="gridContent">
+                    <ScrollViewer Grid.Row="1">
+                        <StackPanel x:Name="ListPassBook" Height="400">
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+                <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+                    <Button x:Name="btnViewPassBook" Margin="10" Content="XEM CHI TIẾT" TextElement.Foreground="Green" Background="White" BorderBrush="Green" TextElement.FontSize="10"/>
+                </WrapPanel>
+
+                <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <GroupBox
+                              x:Name="groupBoxSettlement"
+                              Style="{DynamicResource MaterialDesignGroupBox}"
+                              Margin="16"
+                              Height="250"
+                              materialDesign:ColorZoneAssist.Mode="PrimaryDark">
+                            <Grid>
+                                <DataGrid
+                                        x:Name="dtgridSettlement"
+                                        AutoGenerateColumns="False"
+                                        IsReadOnly="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding GetID}"        
+                                                                Header="Mã số"
+                                                                IsReadOnly="True" />
+                                        <DataGridTextColumn Binding="{Binding Deposit, StringFormat=#-###-###}"        
+                                                                Header="Tổng số tiền gốc"
+                                                                IsReadOnly="True" />
+                                        <DataGridTextColumn Binding="{Binding Term}"
+                                                                Header="Kỳ hạn gửi"
+                                                                IsReadOnly="True" />
+                                        <DataGridTextColumn Binding="{Binding InterestRates}"        
+                                                                Header="Lãi suất năm"
+                                                                IsReadOnly="True" />
+                                        <DataGridTextColumn Binding="{Binding SentDate, StringFormat=dd-MM-yyyy}"        
+                                                                Header="Ngày mở"
+                                                                IsReadOnly="True" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

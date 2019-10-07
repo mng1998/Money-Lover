@@ -13,7 +13,8 @@
         TextOptions.TextRenderingMode="Auto"
         ResizeMode="NoResize"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen" Height="360" Width="770">
+        WindowStartupLocation="CenterScreen" Height="360" Width="770"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
             <Setter Property="HorizontalAlignment" Value="Center"/>

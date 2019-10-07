@@ -7,10 +7,12 @@ using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class EditeditPassBook : Services.PassBookService
+    public class EditPassBook : Validates.PassBookValidate
     {
         private Views.EditPassBook editPassBook;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        private Models.PassBook passBook;
+        private Models.User current_user;
 
         private Dictionary<int, string> term = new Dictionary<int, string>
         {
@@ -35,10 +37,12 @@ namespace MoneyLover.UI.ViewModels
             { 3, "Tất toán sổ" }
         };
 
-        public EditeditPassBook(PassbookList pblist, Models.PassBook pb)
+        public EditPassBook(PassbookList pbList, Models.PassBook pb)
         {
             editPassBook = new Views.EditPassBook();
-            Models.User current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
+            passBook = pb;
+            current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
+            placeData();
 
             editPassBook.cbbBank.ItemsSource = db.Banks.ToList();
             editPassBook.cbbBank.SelectedValuePath = "BankID";
@@ -59,47 +63,57 @@ namespace MoneyLover.UI.ViewModels
             editPassBook.cbbDue.SelectedValuePath = "Keys";
             editPassBook.cbbDue.DisplayMemberPath = "Value";
             editPassBook.cbbDue.SelectedIndex = 0;
-
+            
 
             editPassBook.btnSave.Click += (sender, e) =>
             {
+                Models.PassBook targetPb = db.PassBooks.Find(pb.PassBookID);
+
                 int BankID = Convert.ToInt32(editPassBook.cbbBank.SelectedValue);
                 int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbTerm.SelectedItem).Key);
                 int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbPayInterest.SelectedItem).Key);
                 int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbDue.SelectedItem).Key);
 
-                if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateDeposit(Convert.ToDouble(editPassBook.txtDeposit.Text)))
+                if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(editPassBook.txtDeposit.Text)))
                 {
-                    pb.BankID = BankID;
-                    pb.Deposit = Convert.ToDouble(editPassBook.txtDeposit.Text);
-                    pb.Due = dueKey;
-                    pb.IndefiniteTerm = GetIndefiniteTerm(Convert.ToDouble(editPassBook.txtIndefiniteTerm.Text));
-                    pb.Term = TermKey;
-                    pb.PayInterest = payInterestKey;
-                    pb.SentDate = DateTime.Parse(editPassBook.dpDate.Text);
-                    pb.UserID = current_user.UserID;
-                    pb.InterestRates = Convert.ToDouble(editPassBook.txtInterestRates.Text);
-                    pb.Settlement = false;
-
-                    // xử lý tính toán
+                    targetPb.BankID = BankID;
+                    targetPb.Deposit = Convert.ToDouble(editPassBook.txtDeposit.Text);
+                    targetPb.Due = dueKey;
+                    targetPb.IndefiniteTerm = GetIndefiniteTerm(editPassBook.txtIndefiniteTerm.Text);
+                    targetPb.Term = TermKey;
+                    targetPb.PayInterest = payInterestKey;
+                    targetPb.SentDate = DateTime.Parse(editPassBook.dpDate.Text);
+                    targetPb.EndDate = DateTime.Parse(editPassBook.dpDate.Text).AddMonths(TermKey);
+                    targetPb.UserID = current_user.UserID;
+                    targetPb.InterestRates = Convert.ToDouble(editPassBook.txtInterestRates.Text);
+                    targetPb.Settlement = false;
 
                     db.SaveChanges();
+                    pbList.ShowDataGrid();
                 }
             };
 
             editPassBook.btnCancel.Click += (sender, e) =>
             {
                 editPassBook.Close();
-                pblist.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pblist.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
             };
 
             editPassBook.btnClose.Click += (sender, e) =>
             {
                 editPassBook.Close();
-                pblist.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pblist.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
             };
+        }
+
+        public void placeData()
+        {
+            editPassBook.txtDeposit.Text = passBook.Deposit.ToString();
+            editPassBook.txtIndefiniteTerm.Text = passBook.IndefiniteTerm.ToString();
+            editPassBook.txtInterestRates.Text = passBook.InterestRates.ToString();
+            editPassBook.dpDate.Text = passBook.SentDate.ToString();
+            editPassBook.cbbBank.SelectedIndex = passBook.BankID;
+            editPassBook.cbbDue.SelectedIndex = passBook.Due;
+            editPassBook.cbbPayInterest.SelectedIndex = passBook.PayInterest;
+            editPassBook.cbbTerm.SelectedIndex = passBook.Term;
         }
 
         public void ShowDialog()

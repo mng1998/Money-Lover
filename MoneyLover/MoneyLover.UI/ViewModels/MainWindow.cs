@@ -11,16 +11,30 @@ namespace MoneyLover.UI.ViewModels
 {
     public class MainWindow
     {
-        private Views.MainWindow mainwindowView;
+        private Views.MainWindow mainWindow;
+        private Register register;
+        private SignIn signin;
 
         public MainWindow()
         {
-            mainwindowView = new Views.MainWindow();
+            mainWindow = new Views.MainWindow();
+
+            mainWindow.btnRegister.Click += (sender, e) =>
+            {
+                register = new Register();
+                register.Show();
+            };
+
+            mainWindow.btnSignIn.Click += (sender, e) =>
+            {
+                signin = new SignIn();
+                signin.Show();
+            };
         }
 
         public void Show()
         {
-            mainwindowView.Show();
+            mainWindow.Show();
         }
     }
 }

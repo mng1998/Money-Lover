@@ -78,10 +78,14 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\PassBookService.cs" />
+    <Compile Include="Services\WithDrawalService.cs" />
+    <Compile Include="Validates\AccountValidate.cs" />
+    <Compile Include="Validates\PassBookValidate.cs" />
     <Compile Include="ViewModels\AddToPassBook.cs" />
     <Compile Include="ViewModels\Bank.cs" />
     <Compile Include="ViewModels\EditPassBook.cs" />
     <Compile Include="ViewModels\MainWindow.cs" />
+    <Compile Include="ViewModels\Menu.cs" />
     <Compile Include="ViewModels\PartialWithdrawal.cs" />
     <Compile Include="ViewModels\PassBook.cs" />
     <Compile Include="ViewModels\PassbookList.cs" />
@@ -198,8 +202,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="assets\" />
+    <Resource Include="assets\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\bee.png" />
+    <Resource Include="assets\bee3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

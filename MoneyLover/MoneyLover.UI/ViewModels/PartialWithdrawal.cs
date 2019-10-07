@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
@@ -10,33 +11,85 @@ namespace MoneyLover.UI.ViewModels
     {
         private Views.PartialWithdrawal partialWithdrawal;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        private Models.PassBook passBook;
+        private int UserID = Convert.ToInt32(Application.Current.Resources["current_user_id"]);
 
         public PartialWithdrawal(PassbookList pbList, Models.PassBook pb)
         {
             partialWithdrawal = new Views.PartialWithdrawal();
+            passBook = pb;
 
-            partialWithdrawal.txtPassBookID.Text += pb.PassBookID.ToString();
-            partialWithdrawal.txtSentDate.Text = pb.SentDate.ToString();
-            partialWithdrawal.txtTerm.Text = pb.Term.ToString();
-            partialWithdrawal.txtInterestRates.Text = pb.InterestRates.ToString();
-            partialWithdrawal.txtDeposit.Text = pb.Deposit.ToString();
+            placeData();
 
             partialWithdrawal.btnSave.Click += (sender, e) =>
             {
-                Models.PassBook passBook = db.PassBooks.Where(m => m.PassBookID == pb.PassBookID).FirstOrDefault();
-                passBook.Deposit -= Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
+                Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
+                Models.User user = db.Users.Find(pb.UserID);
 
-                // Xử lý tính toán ở đây
+                if (pb.Term == 99)
+                {
+                    int day = DateTime.Now.Day - pb.SentDate.Day;
+                    if (day > 15)
+                    {
+                        double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
 
+                        if (moneyWithdrawal < pb.Deposit)
+                        {
+                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                            user.SavingsWallet -= moneyWithdrawal;
+                            passBook.Deposit -= moneyWithdrawal;
+                        }
+                        else if( moneyWithdrawal == pb.Deposit)
+                        {
+                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                            user.SavingsWallet -= moneyWithdrawal;
+                            passBook.Settlement = true;
+                        }
+                    }
+                }
+                else
+                {
+                    if (DateTime.Now < pb.EndDate)
+                    {
+                        int day = Convert.ToInt32((DateTime.Now - pb.SentDate).TotalDays);
+                        double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
+
+                        if (moneyWithdrawal < pb.Deposit)
+                        {
+                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                            user.SavingsWallet -= moneyWithdrawal;
+                            passBook.Deposit -= moneyWithdrawal;
+                        }
+                        else if (moneyWithdrawal == pb.Deposit)
+                        {
+                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                            user.SavingsWallet -= moneyWithdrawal;
+                            passBook.Settlement = true;
+                        }
+                    }
+                }
                 db.SaveChanges();
+
+                partialWithdrawal.Close();
+                pbList.ShowDataGrid();
+                pbList.passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
+                pbList.LoadHeaderSettlement();
             };
 
             partialWithdrawal.btnClose.Click += (sender, e) =>
             {
                 partialWithdrawal.Close();
-                pbList.passBookList.dtgridListPassBook.ItemsSource = db.PassBooks.Where(m => m.Settlement == false).ToList();
-                pbList.passBookList.dtgridSettlement.ItemsSource = db.PassBooks.Where(m => m.Settlement == true).ToList();
             };
+        }
+
+        public void placeData()
+        {
+            partialWithdrawal.txtPassBookID.Text = "#" + passBook.PassBookID.ToString();
+            partialWithdrawal.txtSentDate.Text = passBook.SentDate.ToString();
+            partialWithdrawal.txtTerm.Text = passBook.Term.ToString();
+            partialWithdrawal.txtInterestRates.Text = passBook.InterestRates.ToString();
+            partialWithdrawal.txtDeposit.Text = passBook.Deposit.ToString();
+            partialWithdrawal.txtEndDate.Text = passBook.EndDate.ToString();
         }
 
         public void ShowDialog()

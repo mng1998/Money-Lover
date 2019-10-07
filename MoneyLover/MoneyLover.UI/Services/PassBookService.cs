@@ -9,34 +9,43 @@ namespace MoneyLover.UI.Services
 {
     public class PassBookService
     {
-        public bool IsDateBeforeOrToday(string input)
+        private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
+        public Models.PassBook Create(int bankID, double deposit, int due, double indefiniteTerm, int term, int payInterest, DateTime sentDate, int userID, double interestRates)
         {
-            DateTime pDate = DateTime.Parse(input);
-            if (pDate <= DateTime.Now)
-                return true;
-            else
+            Models.PassBook pb = new Models.PassBook
             {
-                MessageBox.Show("Ngày gửi phải bé hơn hoặc bằng ngày hiện tại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
+                BankID = bankID,
+                Deposit = deposit,
+                Due = due,
+                IndefiniteTerm = indefiniteTerm,
+                Term = term,
+                PayInterest = payInterest,
+                SentDate = sentDate,
+                EndDate = getEndDate(sentDate, term),
+                UserID = userID,
+                InterestRates = interestRates,
+                WithDrawalMoney = getWithDrawalMoney(deposit, interestRates, term),
+                Settlement = false
+            };
+
+            Models.User user = db.Users.Find(userID);
+            user.SavingsWallet += deposit;
+            user.Wallet -= deposit;
+
+            db.PassBooks.Add(pb);
+            db.SaveChanges();
+
+            return pb;
         }
 
-        public bool ValidateDeposit(double deposit)
+        public DateTime getEndDate(DateTime SentDate, int Term)
         {
-            if (deposit < 1000000)
-            {
-                MessageBox.Show("Số tiền gửi tối thiểu là 1.000.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-            else return true;
+            return SentDate.AddMonths(Term);
         }
 
-        public double GetIndefiniteTerm(double IndefiniteTerm)
+        public double getWithDrawalMoney(double deposit, double interestRates, int term)
         {
-            if (IndefiniteTerm == 0)
-                return 0.05;
-            else
-                return IndefiniteTerm;
+            return deposit + (deposit * ((interestRates / 12) * term));
         }
     }
 }
