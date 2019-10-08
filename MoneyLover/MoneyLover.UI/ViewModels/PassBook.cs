@@ -78,17 +78,18 @@ namespace MoneyLover.UI.ViewModels
 
                 if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(passBook.txtDeposit.Text)))
                 {
-                    Models.PassBook pb = pbService.Create(BankID, 
-                                     Convert.ToDouble(passBook.txtDeposit.Text), 
-                                     dueKey, 
-                                     GetIndefiniteTerm(passBook.txtIndefiniteTerm.Text), 
-                                     TermKey, 
-                                     payInterestKey, 
-                                     DateTime.Parse(passBook.dpDate.Text), 
-                                     current_user.UserID, 
+                    Models.PassBook pb = pbService.Create(BankID,
+                                     Convert.ToDouble(passBook.txtDeposit.Text),
+                                     dueKey,
+                                     GetIndefiniteTerm(passBook.txtIndefiniteTerm.Text),
+                                     TermKey,
+                                     payInterestKey,
+                                     DateTime.Parse(passBook.dpDate.Text),
+                                     current_user.UserID,
                                      Convert.ToDouble(passBook.txtInterestRates.Text));
-                    
-                   pbList.ShowPassBookList(Bank, Models.PassBook.getListPassBook(current_user.UserID, BankID));
+
+                    pbList.ShowPassBookList(Bank, Models.PassBook.getListPassBook(current_user.UserID, BankID));
+                    passBook.Close();
                 }
             };
 
@@ -106,7 +107,7 @@ namespace MoneyLover.UI.ViewModels
             passBook.btnClose.Click += (sender, e) =>
             {
                 passBook.Close();
-            }; 
+            };
         }
 
         public void ShowDialog()

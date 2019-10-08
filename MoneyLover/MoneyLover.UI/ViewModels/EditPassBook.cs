@@ -63,16 +63,19 @@ namespace MoneyLover.UI.ViewModels
             editPassBook.btnSave.Click += (sender, e) =>
             {
                 Models.PassBook targetPb = db.PassBooks.Find(pb.PassBookID);
+                Models.User user = db.Users.Find(pb.UserID);
 
                 int BankID = Convert.ToInt32(editPassBook.cbbBank.SelectedValue);
                 int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbTerm.SelectedItem).Key);
                 int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbPayInterest.SelectedItem).Key);
                 int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbDue.SelectedItem).Key);
+                double moneyEdit = Convert.ToDouble(editPassBook.txtDeposit.Text);
 
-                if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(editPassBook.txtDeposit.Text)))
+                if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateEditDeposit(pb.UserID, pb.Deposit, moneyEdit))
                 {
+                    double backupDeposit = targetPb.Deposit;
+
                     targetPb.BankID = BankID;
-                    targetPb.Deposit = Convert.ToDouble(editPassBook.txtDeposit.Text);
                     targetPb.Due = dueKey;
                     targetPb.IndefiniteTerm = GetIndefiniteTerm(editPassBook.txtIndefiniteTerm.Text);
                     targetPb.Term = TermKey;
@@ -82,8 +85,13 @@ namespace MoneyLover.UI.ViewModels
                     targetPb.UserID = current_user.UserID;
                     targetPb.InterestRates = Convert.ToDouble(editPassBook.txtInterestRates.Text);
                     targetPb.Settlement = false;
+                    targetPb.Deposit = moneyEdit;
+
+                    user.SavingsWallet = user.SavingsWallet - backupDeposit + moneyEdit;
+                    user.Wallet = user.Wallet + backupDeposit - moneyEdit;
 
                     db.SaveChanges();
+                    editPassBook.Close();
                     pbList.ShowDataGrid();
                 }
             };

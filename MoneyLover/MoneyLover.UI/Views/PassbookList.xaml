@@ -37,18 +37,19 @@
                         Style="{StaticResource MaterialDesignFlatButton}"
                         ToolTip="Trở về" />
                 </Grid>
-                <TextBlock
-                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                        Margin="0"
-                        HorizontalAlignment="Center"
-                        FontSize="28" Text="SỔ TIẾT KIỆM"/>
-
+                
                 <TextBlock
                     x:Name="txtWallet"
                         Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                         Margin="2"
                         HorizontalAlignment="Center"
                         FontSize="14"/>
+
+                <TextBlock
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Margin="0"
+                        HorizontalAlignment="Center"
+                        FontSize="28" Text="SỔ TIẾT KIỆM"/>
 
                 <TextBlock
                     x:Name="txtSavingsWallet"

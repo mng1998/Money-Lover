@@ -22,6 +22,10 @@ namespace MoneyLover.UI.ViewModels
                  if (Register(registerView.txtEmail.Text, registerView.psdPassword.Password))
                  {
                      MessageBox.Show("Đăng kí thành công!", "Thông Báo", MessageBoxButton.OK ,MessageBoxImage.Information);
+
+                     registerView.Hide();
+                     signIn = new SignIn(mainWindow);
+                     signIn.signinView.Show();
                  }
              };
 

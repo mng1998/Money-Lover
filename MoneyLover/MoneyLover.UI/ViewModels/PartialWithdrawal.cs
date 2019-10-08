@@ -32,45 +32,72 @@ namespace MoneyLover.UI.ViewModels
                     int day = Convert.ToInt32((DateTime.Now - pb.SentDate).TotalDays);
                     if (day > 15)
                     {
-                        double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
+                        try
+                        {
+                            double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
 
-                        if (moneyWithdrawal < pb.Deposit)
-                        {
-                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
-                            user.SavingsWallet -= moneyWithdrawal;
-                            passBook.Deposit -= moneyWithdrawal;
+                            if (moneyWithdrawal < pb.Deposit && moneyWithdrawal > 0)
+                            {
+                                user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                                user.SavingsWallet -= moneyWithdrawal;
+                                passBook.Deposit -= moneyWithdrawal;
+                            }
+                            else if (moneyWithdrawal == pb.Deposit)
+                            {
+                                user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                                user.SavingsWallet -= moneyWithdrawal;
+                                passBook.Settlement = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Số tiền rút không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
-                        else if( moneyWithdrawal == pb.Deposit)
-                        {
-                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
-                            user.SavingsWallet -= moneyWithdrawal;
-                            passBook.Settlement = true;
-                        }
+                        catch { MessageBox.Show("Số tiền rút không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
                     }
                 }
                 else
                 {
                     if (DateTime.Now < pb.EndDate)
                     {
-                        int day = Convert.ToInt32((DateTime.Now - pb.SentDate).TotalDays);
-                        double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
+                        try
+                        {
+                            Notification noti = new Notification(pb);
+                            int day = Convert.ToInt32((DateTime.Now - pb.SentDate).TotalDays);
+                            double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
 
-                        if (moneyWithdrawal < pb.Deposit)
-                        {
-                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
-                            user.SavingsWallet -= moneyWithdrawal;
-                            passBook.Deposit -= moneyWithdrawal;
+                            if (moneyWithdrawal < pb.Deposit && moneyWithdrawal > 0)
+                            {
+                                noti.ShowDialog();
+
+                                if (noti.flag == true)
+                                {
+                                    user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                                    user.SavingsWallet -= moneyWithdrawal;
+                                    passBook.Deposit -= moneyWithdrawal;
+                                }
+                            }
+                            else if (moneyWithdrawal == pb.Deposit)
+                            {
+                                noti.ShowDialog();
+
+                                if (noti.flag == true)
+                                {
+                                    user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
+                                    user.SavingsWallet -= moneyWithdrawal;
+                                    passBook.Settlement = true;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Số tiền rút không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
-                        else if (moneyWithdrawal == pb.Deposit)
-                        {
-                            user.Wallet += (moneyWithdrawal + (moneyWithdrawal * (passBook.IndefiniteTerm / 100) * day) / 365);
-                            user.SavingsWallet -= moneyWithdrawal;
-                            passBook.Settlement = true;
-                        }
+                        catch { MessageBox.Show("Số tiền rút không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
                     }
                 }
-                db.SaveChanges();
 
+                db.SaveChanges();
                 partialWithdrawal.Close();
                 pbList.ShowDataGrid();
                 pbList.passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
