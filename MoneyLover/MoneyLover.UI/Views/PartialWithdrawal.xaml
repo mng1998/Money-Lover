@@ -73,7 +73,7 @@
                     <TextBox x:Name="txtInterestRates" IsReadOnly="True" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True"/>
 
                     <Border CornerRadius="4" Margin="8" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Padding="0,0,0,4">
-                        <TextBox x:Name="txtWithDrawDeposit" materialDesign:HintAssist.Hint="Số tiền muốn rút" >
+                        <TextBox x:Name="txtWithDrawDeposit" materialDesign:HintAssist.Hint="Số tiền muốn rút" materialDesign:HintAssist.IsFloating="True" >
                             <TextBox.Resources >
                                 <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
                                     <Setter Property="HorizontalAlignment" Value="Left"/>
