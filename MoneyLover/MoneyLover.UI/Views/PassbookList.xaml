@@ -11,7 +11,7 @@
         TextElement.FontFamily="Arial"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Height="700" Width="800"
+        Height="750" Width="800"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -37,18 +37,19 @@
                         Style="{StaticResource MaterialDesignFlatButton}"
                         ToolTip="Trở về" />
                 </Grid>
-                <TextBlock
-                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
-                        Margin="0"
-                        HorizontalAlignment="Center"
-                        FontSize="28" Text="SỔ TIẾT KIỆM"/>
-
+                
                 <TextBlock
                     x:Name="txtWallet"
                         Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                         Margin="2"
                         HorizontalAlignment="Center"
                         FontSize="14"/>
+
+                <TextBlock
+                        Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+                        Margin="0"
+                        HorizontalAlignment="Center"
+                        FontSize="28" Text="SỔ TIẾT KIỆM"/>
 
                 <TextBlock
                     x:Name="txtSavingsWallet"
@@ -83,7 +84,7 @@
                     </WrapPanel>
 
                     <Grid Grid.Row="1" x:Name="gridContent">
-                        <ScrollViewer Grid.Row="1" Height="150">
+                        <ScrollViewer Grid.Row="1" Height="250">
                             <StackPanel x:Name="ListPassBook">
                             </StackPanel>
                         </ScrollViewer>
@@ -97,8 +98,8 @@
                             <GroupBox
                               x:Name="groupBoxSettlement"
                               Style="{DynamicResource MaterialDesignGroupBox}"
-                              Margin="10"
-                              Height="200"
+                              Margin="10 0 10 0"
+                              Height="210"
                               materialDesign:ColorZoneAssist.Mode="PrimaryDark">
                                 <Grid>
                                     <DataGrid
@@ -109,16 +110,16 @@
                                             <DataGridTextColumn Binding="{Binding GetID}"        
                                                                 Header="Mã số"
                                                                 IsReadOnly="True" />
-                                            <DataGridTextColumn Binding="{Binding Deposit, StringFormat=#-###-###}"        
+                                            <DataGridTextColumn Binding="{Binding Deposit, StringFormat='#,### đ', ConverterCulture=vi-VN}"        
                                                                 Header="Tổng số tiền gốc"
                                                                 IsReadOnly="True" />
-                                            <DataGridTextColumn Binding="{Binding Term}"
+                                            <DataGridTextColumn Binding="{Binding Term, StringFormat=0 tháng}"
                                                                 Header="Kỳ hạn gửi"
                                                                 IsReadOnly="True" />
-                                            <DataGridTextColumn Binding="{Binding InterestRates}"        
+                                            <DataGridTextColumn Binding="{Binding InterestRates, StringFormat=#\\%}"        
                                                                 Header="Lãi suất năm"
                                                                 IsReadOnly="True" />
-                                            <DataGridTextColumn Binding="{Binding SentDate, StringFormat=dd-MM-yyyy}"        
+                                            <DataGridTextColumn Binding="{Binding SentDate, StringFormat='dd/MM/yyyy'}"        
                                                                 Header="Ngày mở"
                                                                 IsReadOnly="True" />
                                         </DataGrid.Columns>

@@ -11,7 +11,7 @@ namespace MoneyLover.UI.ViewModels
 {
     public class MainWindow
     {
-        private Views.MainWindow mainWindow;
+        public Views.MainWindow mainWindow;
         private Register register;
         private SignIn signin;
 
@@ -21,20 +21,35 @@ namespace MoneyLover.UI.ViewModels
 
             mainWindow.btnRegister.Click += (sender, e) =>
             {
-                register = new Register();
+                Hide();
+                register = new Register(this);
                 register.Show();
             };
 
             mainWindow.btnSignIn.Click += (sender, e) =>
             {
-                signin = new SignIn();
+                Hide();
+                signin = new SignIn(this);
                 signin.Show();
+            };
+
+            mainWindow.btnExit.Click += (sender, e) =>
+            {
+                if (MessageBox.Show("Bạn muốn thoát ứng dụng ?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
             };
         }
 
         public void Show()
         {
             mainWindow.Show();
+        }
+
+        public void Hide()
+        {
+            mainWindow.Hide();
         }
     }
 }

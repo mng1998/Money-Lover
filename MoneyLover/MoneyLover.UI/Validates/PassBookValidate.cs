@@ -25,7 +25,8 @@ namespace MoneyLover.UI.Validates
         {
             using (var db = new DB.MoneyLoverDB())
             {
-                if (deposit < 1000000 && deposit < Models.User.GetUser(UserID).Wallet)
+                Models.User user = db.Users.Find(UserID);
+                if (deposit < 1000000 || deposit > user.Wallet)
                 {
                     MessageBox.Show("Số tiền gửi tối thiểu là 1.000.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
@@ -34,16 +35,31 @@ namespace MoneyLover.UI.Validates
             }
         }
 
-        public double ValidateAddDeposit(int UserID, double deposit)
+        public bool ValidateAddDeposit(int UserID, double deposit)
         {
             using (var db = new DB.MoneyLoverDB())
             {
-                if (deposit < 100000 && deposit < Models.User.GetUser(UserID).Wallet)
+                Models.User user = db.Users.Find(UserID);
+                if (deposit < 100000 || deposit > user.Wallet)
                 {
                     MessageBox.Show("Số tiền gửi thêm tối thiểu là 100.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return 0;
+                    return false;
                 }
-                else return deposit;
+                else return true;
+            }
+        }
+
+        public bool ValidateEditDeposit(int UserID, double olddeposit, double deposit)
+        {
+            using (var db = new DB.MoneyLoverDB())
+            {
+                Models.User user = db.Users.Find(UserID);
+                if (deposit < 0 || deposit > (user.Wallet + olddeposit))
+                {
+                    MessageBox.Show("Số tiền không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                else return true;
             }
         }
 

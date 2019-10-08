@@ -9,6 +9,7 @@
         TextElement.FontSize="13"
         TextElement.FontFamily="Arial"
         Height="200" Width="270"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
@@ -24,7 +25,7 @@
             <Image HorizontalAlignment="Center" Source="../assets/bee.png"/>
         </Grid>
         <Grid Grid.Row="1">
-            <TextBlock Text="Sổ tiết kiệm { đến hạn ngày {xx-xx-xxxx}. Số tiền rút ra trước hạn sẽ được tính lãi theo lãi suất không kì hạn (0.05%/năm). Bạn có muốn tiếp tục không?" 
+            <TextBlock x:Name="txtNoti" 
                        TextWrapping="Wrap" 
                        TextAlignment="Center" 
                        Margin="5"/>
