@@ -22,18 +22,21 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="340"/>
+            <Setter Property="Padding" Value="3"/>
         </Style>
         <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="340"/>
+            <Setter Property="Padding" Value="3"/>
         </Style>
         <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignDatePicker}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="340"/>
+            <Setter Property="Padding" Value="3"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -88,15 +91,15 @@
                     <ComboBox x:Name="cbbBank" Foreground="Green" materialDesign:HintAssist.Hint="Ngân hàng" materialDesign:HintAssist.IsFloating="True" />
                     <TextBox x:Name="txtDeposit" Foreground="Green" materialDesign:HintAssist.Hint="Số tiền gửi (VNĐ)" materialDesign:HintAssist.IsFloating="True" />
                     <TextBox x:Name="txtInterestRates" Foreground="Green" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True" />
-                    <ComboBox x:Name="cbbPayInterest" Foreground="Green" materialDesign:HintAssist.Hint="Trả lãi" materialDesign:HintAssist.IsFloating="True" />
+                    <ComboBox x:Name="cbbPayInterest" Foreground="Green" materialDesign:HintAssist.Hint="Trả lãi" materialDesign:HintAssist.IsFloating="True"/>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
-        <Button x:Name="btnCancel" Grid.Row="2" HorizontalAlignment="Right" Foreground="#2DB84C" Background="White" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="0,0,10,1.6">
-            CANCEL
+        <Button x:Name="btnCancel" Grid.Row="2" HorizontalAlignment="Right" Background="Green"  Foreground="White" TextElement.FontSize="12" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="0,0,10,1.6">
+            HỦY
         </Button>
-        <Button x:Name="btnSave" Grid.Row="1" HorizontalAlignment="Center" Foreground="#2DB84C" Background="White" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="541,249.4,127,1.8" Grid.RowSpan="2">
-            SAVE
+        <Button x:Name="btnSave" Grid.Row="1" HorizontalAlignment="Center" Background="Green"  Foreground="White" TextElement.FontSize="12" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="541,249.4,127,1.8" Grid.RowSpan="2">
+            LƯU
         </Button>
     </Grid>
 </Window>

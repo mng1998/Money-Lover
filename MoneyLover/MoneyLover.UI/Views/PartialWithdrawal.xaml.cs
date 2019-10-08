@@ -28,5 +28,10 @@ namespace MoneyLover.UI.Views
         {
             DragMove();
         }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

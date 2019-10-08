@@ -63,7 +63,7 @@
             <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" VerticalAlignment="Bottom" TextElement.Foreground="Black" TextElement.FontSize="20" TextAlignment="Center"/>
             <TextBox x:Name="txtEmail" Grid.Row ="3"   materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True" />
             <PasswordBox x:Name="psdPassword" Grid.Row ="4" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True"/>
-            <Button x:Name="btnRegister" Grid.Row ="5" Height="50" Width="320" Content="ĐĂNG KÝ" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold">
+            <Button x:Name="btnRegister" Grid.Row ="5" Height="30" Width="320" Content="ĐĂNG KÝ" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold">
             </Button>
             <Button x:Name="btnsignIn" Grid.Row ="8" Height="30" Content="ĐĂNG NHẬP" 
                     TextElement.Foreground="Green" TextElement.FontSize="10" TextElement.FontWeight="Bold"

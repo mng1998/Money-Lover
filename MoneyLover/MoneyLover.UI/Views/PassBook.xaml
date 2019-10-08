@@ -106,11 +106,11 @@
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
-        <Button x:Name="btnCancel" Grid.Row="2" HorizontalAlignment="Right" Foreground="#2DB84C" Background="White" BorderBrush="Green" BorderThickness="1" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="0,0,10,1.6">
-            CANCEL
+        <Button x:Name="btnCancel" Grid.Row="2" HorizontalAlignment="Right" Background="Green"  Foreground="White" TextElement.FontSize="12" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="0,0,10,1.6">
+            HỦY
         </Button>
-        <Button x:Name="btnSave" Grid.Row="1" HorizontalAlignment="Center" Foreground="#2DB84C" Background="White" BorderBrush="Green" BorderThickness="1" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="541,249.4,127,1.8" Grid.RowSpan="2">
-            SAVE
+        <Button x:Name="btnSave" Grid.Row="1" HorizontalAlignment="Center" Background="Green"  Foreground="White" TextElement.FontSize="12" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="541,249.4,127,1.8" Grid.RowSpan="2">
+            LƯU
         </Button>
     </Grid>
 </Window>

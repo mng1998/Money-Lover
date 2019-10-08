@@ -12,7 +12,7 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="White"
-        Height="auto" Width="500"
+        Height="600" Width="350"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -22,10 +22,10 @@
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="auto"/>
-            <Setter Property="Width" Value="420"/>
+            <Setter Property="Width" Value="300"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Foreground" Value="Green"/>
-            <Setter Property="Margin" Value="16 0 16 8"/>
+            <Setter Property="Margin" Value="8"/>
         </Style>
         <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -41,22 +41,22 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <!--Header-->
-        <materialDesign:ColorZone Grid.Row="0" Mode="PrimaryMid" Padding="16">
+        <materialDesign:ColorZone Grid.Row="0" Mode="PrimaryMid" Padding="10">
             <DockPanel>
                 <Button x:Name="btnClose" VerticalAlignment="Center" TextElement.Foreground="White" Style="{StaticResource MaterialDesignFlatButton}"
                         Content="{materialDesign:PackIcon Kind=WindowClose}" DockPanel.Dock="Right" />
                 <StackPanel Orientation="Horizontal" materialDesign:RippleAssist.IsCentered="True">
-                    <ToggleButton Foreground="White" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                    <ToggleButton Foreground="White" Style="{DynamicResource MaterialDesignHamburgerToggleButton}" Click="ToggleButton_Click" />
                     <TextBlock
                           Text="Rút một phần tiền từ sổ tiết kiệm"
                           VerticalAlignment="Center"
                           Margin="16 0 0 0"
                           Foreground="White"
-                          FontSize="20"/>
+                          FontSize="16"/>
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
-        <materialDesign:Card Margin="15" Grid.Row="1" Background="White" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+        <materialDesign:Card Margin="8" Grid.Row="1" Background="White" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -65,21 +65,33 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="2">
                     <TextBox x:Name="txtPassBookID" Text="Mã số: #" IsReadOnly="True" FontSize="25"/>
-                    <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}" />
+                    <TextBox x:Name="txtBank" IsReadOnly="True" materialDesign:HintAssist.Hint="Ngân hàng" materialDesign:HintAssist.IsFloating="True"/>
                     <TextBox x:Name="txtSentDate" IsReadOnly="True" materialDesign:HintAssist.Hint="Ngày mở" materialDesign:HintAssist.IsFloating="True"/>
                     <TextBox x:Name="txtDeposit" IsReadOnly="True" materialDesign:HintAssist.Hint="Số tiền gửi" materialDesign:HintAssist.IsFloating="True"/>
                     <TextBox x:Name="txtTerm" IsReadOnly="True" materialDesign:HintAssist.Hint="Kỳ hạn" materialDesign:HintAssist.IsFloating="True"/>
                     <TextBox x:Name="txtEndDate" IsReadOnly="True" materialDesign:HintAssist.Hint="Ngày đến hạn" materialDesign:HintAssist.IsFloating="True"/>
                     <TextBox x:Name="txtInterestRates" IsReadOnly="True" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True"/>
-                    <TextBox x:Name="txtWithDrawDeposit" materialDesign:HintAssist.Hint="Số tiền muốn rút" materialDesign:HintAssist.IsFloating="True"></TextBox>
 
+                    <Border CornerRadius="4" Margin="8" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Padding="0,0,0,4">
+                        <TextBox x:Name="txtWithDrawDeposit" materialDesign:HintAssist.Hint="Số tiền muốn rút" >
+                            <TextBox.Resources >
+                                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Height" Value="50"/>
+                                    <Setter Property="Width" Value="300"/>
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="Foreground" Value="Green"/>
+                                </Style>
+                            </TextBox.Resources>
+                        </TextBox>
+                    </Border>
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
 
-        <Button x:Name="btnSave" Grid.Row ="8" Height="40" Background="Green" Foreground="White" Content="RÚT NGAY"  Margin="15"
-                    TextElement.Foreground="Green" TextElement.FontSize="12"
-                    Style="{StaticResource MaterialDesignFlatButton}"/>
+        <Button x:Name="btnSave" Grid.Row ="8" Height="40" Background="Green" Content="RÚT NGAY"  Margin="8"
+                    Foreground="White" TextElement.FontSize="12"/>
 
       
     </Grid>

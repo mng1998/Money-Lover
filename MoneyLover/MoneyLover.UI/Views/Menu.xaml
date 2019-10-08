@@ -60,7 +60,7 @@
             </Grid>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2">
-            <materialDesign:Card  Background="White" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+            <materialDesign:Card Margin="10"  Background="White" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                 <Grid Margin="0 20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
