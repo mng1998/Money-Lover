@@ -23,6 +23,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="320"/>
+            <Setter Property="FontSize" Value="11"/>
             <Setter Property="Foreground" Value="Green"/>
         </Style>
         <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
@@ -30,7 +31,8 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="320"/>
-            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#a9a9a9 "/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -62,7 +64,18 @@
 
             <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" VerticalAlignment="Bottom" TextElement.Foreground="Black" TextElement.FontSize="20" TextAlignment="Center"/>
             <TextBox x:Name="txtEmail" Grid.Row ="3"   materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True" />
-            <PasswordBox x:Name="psdPassword" Grid.Row ="4" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="txtVisiblePasswordbox" Grid.Row="4" Foreground="#a9a9a9"  materialDesign:HintAssist.Hint=""  materialDesign:HintAssist.IsFloating="True"/>
+            <PasswordBox x:Name="psdPassword"  Grid.Row="4" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" PasswordChanged="psdPassword_PasswordChanged"/>
+            <Button x:Name="btnShowPassword" 
+                    MouseLeave="ImgShowHide_MouseLeave" 
+                    PreviewMouseDown="ImgShowHide_PreviewMouseDown" 
+                    PreviewMouseUp="ImgShowHide_PreviewMouseUp"
+                    HorizontalAlignment="Right" Height="30" 
+                    TextElement.Foreground="Black"
+                    Content="{materialDesign:PackIcon Kind=Eye}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Margin="0,28,10.4,8.4" Grid.Row="4"/>
+
             <Button x:Name="btnRegister" Grid.Row ="5" Height="30" Width="320" Content="ĐĂNG KÝ" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold">
             </Button>
             <Button x:Name="btnsignIn" Grid.Row ="8" Height="30" Content="ĐĂNG NHẬP" 
