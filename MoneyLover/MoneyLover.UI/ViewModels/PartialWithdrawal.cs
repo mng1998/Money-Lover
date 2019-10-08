@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,12 +85,13 @@ namespace MoneyLover.UI.ViewModels
 
         public void placeData()
         {
-            partialWithdrawal.txtPassBookID.Text = "#" + passBook.PassBookID.ToString();
-            partialWithdrawal.txtSentDate.Text = passBook.SentDate.ToString();
-            partialWithdrawal.txtTerm.Text = passBook.Term.ToString();
-            partialWithdrawal.txtInterestRates.Text = passBook.InterestRates.ToString();
-            partialWithdrawal.txtDeposit.Text = passBook.Deposit.ToString();
-            partialWithdrawal.txtEndDate.Text = passBook.EndDate.ToString();
+            partialWithdrawal.txtPassBookID.Text = "#" + passBook.GetID;
+            partialWithdrawal.txtBank.Text = Models.Bank.GetBank(passBook.BankID).BankName;
+            partialWithdrawal.txtSentDate.Text = passBook.SentDate.ToString("dd/MM/yyyy");
+            partialWithdrawal.txtTerm.Text = passBook.Term.ToString("0 tháng");
+            partialWithdrawal.txtInterestRates.Text = passBook.InterestRates.ToString("#\\%");
+            partialWithdrawal.txtDeposit.Text = passBook.Deposit.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+            partialWithdrawal.txtEndDate.Text = passBook.EndDate.ToString("dd/MM/yyyy");
         }
 
         public void ShowDialog()

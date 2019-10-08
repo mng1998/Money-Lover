@@ -42,29 +42,24 @@ namespace MoneyLover.UI.ViewModels
             editPassBook = new Views.EditPassBook();
             passBook = pb;
             current_user = db.Users.Find(Application.Current.Resources["current_user_id"]);
-            placeData();
 
             editPassBook.cbbBank.ItemsSource = db.Banks.ToList();
             editPassBook.cbbBank.SelectedValuePath = "BankID";
             editPassBook.cbbBank.DisplayMemberPath = "BankName";
-            editPassBook.cbbBank.SelectedIndex = 0;
 
             editPassBook.cbbTerm.ItemsSource = term;
             editPassBook.cbbTerm.SelectedValuePath = "Keys";
             editPassBook.cbbTerm.DisplayMemberPath = "Value";
-            editPassBook.cbbTerm.SelectedIndex = 0;
 
             editPassBook.cbbPayInterest.ItemsSource = payInterest;
             editPassBook.cbbPayInterest.SelectedValuePath = "Keys";
             editPassBook.cbbPayInterest.DisplayMemberPath = "Value";
-            editPassBook.cbbPayInterest.SelectedIndex = 0;
 
             editPassBook.cbbDue.ItemsSource = due;
             editPassBook.cbbDue.SelectedValuePath = "Keys";
             editPassBook.cbbDue.DisplayMemberPath = "Value";
-            editPassBook.cbbDue.SelectedIndex = 0;
-            
 
+            placeData();
             editPassBook.btnSave.Click += (sender, e) =>
             {
                 Models.PassBook targetPb = db.PassBooks.Find(pb.PassBookID);
@@ -110,10 +105,10 @@ namespace MoneyLover.UI.ViewModels
             editPassBook.txtIndefiniteTerm.Text = passBook.IndefiniteTerm.ToString();
             editPassBook.txtInterestRates.Text = passBook.InterestRates.ToString();
             editPassBook.dpDate.Text = passBook.SentDate.ToString();
-            editPassBook.cbbBank.SelectedIndex = passBook.BankID;
-            editPassBook.cbbDue.SelectedIndex = passBook.Due;
-            editPassBook.cbbPayInterest.SelectedIndex = passBook.PayInterest;
-            editPassBook.cbbTerm.SelectedIndex = passBook.Term;
+            editPassBook.cbbBank.SelectedIndex = passBook.BankID - 1;
+            editPassBook.cbbDue.SelectedIndex = passBook.Due - 1;
+            editPassBook.cbbPayInterest.SelectedIndex = passBook.PayInterest - 1;
+            editPassBook.cbbTerm.SelectedIndex = (passBook.Term == 99 ? 0 : (passBook.Term == 1 ? 1 : (passBook.Term == 3 ? 2 : (passBook.Term == 6 ? 3 : (passBook.Term == 12 ? 4 : 0)))));
         }
 
         public void ShowDialog()

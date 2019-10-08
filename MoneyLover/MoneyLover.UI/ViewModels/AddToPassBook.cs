@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,7 @@ namespace MoneyLover.UI.ViewModels
             {
                 Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
                 passBook.Deposit += Convert.ToDouble(addToPassBook.txtAddMoreDeposit.Text);
-
-                // Xử lý tính toán ở đây
-
+                
                 db.SaveChanges();
             };
 
@@ -38,12 +37,13 @@ namespace MoneyLover.UI.ViewModels
 
         public void placeData()
         {
-            addToPassBook.txtDeposit.Text = passBook.Deposit.ToString();
-            addToPassBook.txtInterestRates.Text = passBook.InterestRates.ToString();
+            addToPassBook.txtBank.Text = Models.Bank.GetBank(passBook.BankID).BankName;
+            addToPassBook.txtDeposit.Text = passBook.Deposit.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+            addToPassBook.txtInterestRates.Text = passBook.InterestRates.ToString("#\\%");
             addToPassBook.txtSentDate.Text = passBook.SentDate.ToString("dd/MM/yyyy");
             addToPassBook.txtEndDate.Text = passBook.EndDate.ToString("dd/MM/yyyy");
             addToPassBook.txtPassBookID.Text = "#" + passBook.GetID;
-            addToPassBook.txtTerm.Text = passBook.Term.ToString();
+            addToPassBook.txtTerm.Text = passBook.Term.ToString("0 tháng");
         }
 
         public void ShowDialog()

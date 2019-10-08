@@ -10,11 +10,10 @@ namespace MoneyLover.UI.ViewModels
 {
     public class Register : Services.AccountService
     {
-        private Views.Register registerView;
-        private Views.SignIn signInView;
-        private Views.MainWindow mainwindowView;
+        public Views.Register registerView;
+        private SignIn signIn;
 
-        public Register()
+        public Register(MainWindow mainWindow)
         {
             registerView = new Views.Register();
 
@@ -28,16 +27,15 @@ namespace MoneyLover.UI.ViewModels
 
             registerView.btnBack.Click += (sender, e) =>
             {
-                registerView.Close();
-                mainwindowView = new Views.MainWindow();
-                mainwindowView.Show();
+                registerView.Hide();
+                mainWindow.mainWindow.Show();
             };
 
             registerView.btnsignIn.Click += (sender, e) =>
             {
-                registerView.Close();
-                signInView = new Views.SignIn();
-                signInView.Show();
+                registerView.Hide();
+                signIn = new SignIn(mainWindow);
+                signIn.signinView.Show();
             };
         }
 
