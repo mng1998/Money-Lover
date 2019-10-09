@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace MoneyLover.UI.Views
 {
     /// <summary>
-    /// Interaction logic for PassBook.xaml
+    /// Interaction logic for Bank.xaml
     /// </summary>
-    public partial class PassBook : Window
+    public partial class Bank : Window
     {
-        public PassBook()
+        public Bank()
         {
             InitializeComponent();
         }

@@ -20,26 +20,14 @@ namespace MoneyLover.UI.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ViewModels.Register registerView;
-        private ViewModels.SignIn signinView;
-
         public MainWindow()
         {
             InitializeComponent();
-            registerView = new ViewModels.Register();
-            signinView = new ViewModels.SignIn();
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            registerView.Show();
-            this.Close();
-        }
-
-        private void btnSignIn_Click(object sender, RoutedEventArgs e)
-        {
-            signinView.Show();
-            this.Close();
+            DragMove();
         }
     }
 }

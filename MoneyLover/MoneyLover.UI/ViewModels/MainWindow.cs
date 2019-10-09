@@ -11,16 +11,45 @@ namespace MoneyLover.UI.ViewModels
 {
     public class MainWindow
     {
-        private Views.MainWindow mainwindowView;
+        public Views.MainWindow mainWindow;
+        private Register register;
+        private SignIn signin;
 
         public MainWindow()
         {
-            mainwindowView = new Views.MainWindow();
+            mainWindow = new Views.MainWindow();
+
+            mainWindow.btnRegister.Click += (sender, e) =>
+            {
+                Hide();
+                register = new Register(this);
+                register.Show();
+            };
+
+            mainWindow.btnSignIn.Click += (sender, e) =>
+            {
+                Hide();
+                signin = new SignIn(this);
+                signin.Show();
+            };
+
+            mainWindow.btnExit.Click += (sender, e) =>
+            {
+                if (MessageBox.Show("Bạn muốn thoát ứng dụng ?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
+            };
         }
 
         public void Show()
         {
-            mainwindowView.Show();
+            mainWindow.Show();
+        }
+
+        public void Hide()
+        {
+            mainWindow.Hide();
         }
     }
 }

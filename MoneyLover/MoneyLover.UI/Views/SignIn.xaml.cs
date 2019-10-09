@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,44 @@ namespace MoneyLover.UI.Views
     /// </summary>
     public partial class SignIn : Window
     {
+
         public SignIn()
         {
             InitializeComponent();
+        }
+        private void ImgShowHide_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            HidePassword();
+        }
+
+        private void ImgShowHide_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ShowPassword();
+        }
+        private void ImgShowHide_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HidePassword();
+        }
+        private void psdPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+          
+        }
+        public void ShowPassword()
+        {
+            txtVisiblePasswordbox.Visibility = Visibility.Visible;
+            psdPassword.Visibility = Visibility.Hidden;
+            txtVisiblePasswordbox.Text = psdPassword.Password;
+        }
+        public void HidePassword()
+        {
+            txtVisiblePasswordbox.Visibility = Visibility.Hidden;
+            psdPassword.Visibility = Visibility.Visible;
+            psdPassword.Focus();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

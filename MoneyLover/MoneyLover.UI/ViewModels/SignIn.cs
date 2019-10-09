@@ -10,34 +10,45 @@ namespace MoneyLover.UI.ViewModels
 {
     public class SignIn : Services.AccountService
     {
-        private Views.SignIn signinView;
-        private Views.Register registerView;
-        private Views.MainWindow mainwindowView;
+        public Views.SignIn signinView;
+        private PassbookList passBookList;
+        private Register register;
 
-        public SignIn()
+        public SignIn(MainWindow mainWindow)
         {
             signinView = new Views.SignIn();
 
             signinView.btnBack.Click += (sender, e) =>
             {
-                signinView.Close();
-                mainwindowView = new Views.MainWindow();
-                mainwindowView.Show();
+                signinView.Hide();
+                mainWindow.Show();
             };
 
             signinView.btnRegister.Click += (sender, e) =>
             {
-                signinView.Close();
-                registerView = new Views.Register();
-                registerView.Show();
+                signinView.Hide();
+                register = new Register(mainWindow);
+                register.registerView.Show();
             };
 
             signinView.btnSignIn.Click += (sender, e) =>
             {
                 if (Login(signinView.txtEmail.Text, signinView.psdPassword.Password))
-                    MessageBox.Show("Login Success!");
+                {
+                    signinView.Close();
+                    passBookList = new PassbookList(mainWindow);
+                    passBookList.Show();
+                }
                 else
-                    MessageBox.Show("Email or Password is not correct!");
+                    MessageBox.Show("Email hoặc Mật khẩu không chính xác!");
+            };
+
+            signinView.btnClose.Click += (sender, e) =>
+            {
+                if (MessageBox.Show("Bạn muốn thoát ứng dụng ?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
             };
         }
 

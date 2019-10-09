@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace MoneyLover.UI.Views
 {
     /// <summary>
-    /// Interaction logic for PassBook.xaml
+    /// Interaction logic for PartialWithdrawal.xaml
     /// </summary>
-    public partial class PassBook : Window
+    public partial class PartialWithdrawal : Window
     {
-        public PassBook()
+        public PartialWithdrawal()
         {
             InitializeComponent();
         }
@@ -27,6 +27,11 @@ namespace MoneyLover.UI.Views
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

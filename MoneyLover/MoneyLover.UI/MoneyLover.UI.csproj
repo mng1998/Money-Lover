@@ -77,10 +77,37 @@
     <Compile Include="Models\PassBook.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\PassBookService.cs" />
+    <Compile Include="Services\WithDrawalService.cs" />
+    <Compile Include="Validates\AccountValidate.cs" />
+    <Compile Include="Validates\PassBookValidate.cs" />
+    <Compile Include="ViewModels\AddToPassBook.cs" />
+    <Compile Include="ViewModels\Bank.cs" />
+    <Compile Include="ViewModels\EditPassBook.cs" />
     <Compile Include="ViewModels\MainWindow.cs" />
+    <Compile Include="ViewModels\Menu.cs" />
+    <Compile Include="ViewModels\Notification.cs" />
+    <Compile Include="ViewModels\PartialWithdrawal.cs" />
+    <Compile Include="ViewModels\PassBook.cs" />
     <Compile Include="ViewModels\PassbookList.cs" />
     <Compile Include="ViewModels\Register.cs" />
     <Compile Include="ViewModels\SignIn.cs" />
+    <Compile Include="ViewModels\Withdrawal.cs" />
+    <Compile Include="Views\AddToPassBook.xaml.cs">
+      <DependentUpon>AddToPassBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Bank.xaml.cs">
+      <DependentUpon>Bank.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditPassBook.xaml.cs">
+      <DependentUpon>EditPassBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PartialWithdrawal.xaml.cs">
+      <DependentUpon>PartialWithdrawal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PassBook.xaml.cs">
       <DependentUpon>PassBook.xaml</DependentUpon>
     </Compile>
@@ -93,9 +120,24 @@
     <Compile Include="Views\SignIn.xaml.cs">
       <DependentUpon>SignIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="Views\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Withdrawal.xaml.cs">
+      <DependentUpon>Withdrawal.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AddToPassBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Bank.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditPassBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +150,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PartialWithdrawal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PassBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,7 +174,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Window1.xaml">
+    <Page Include="Views\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Withdrawal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,7 +211,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
+    <Resource Include="assets\hide.png" />
+    <Resource Include="assets\show.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\bee.png" />
+    <Resource Include="assets\bee3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

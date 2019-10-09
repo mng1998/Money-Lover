@@ -16,6 +16,7 @@ namespace MoneyLover.UI
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            DB.MoneyLoverSeedData seed = new DB.MoneyLoverSeedData();
             ViewModels.MainWindow mainWindow = new ViewModels.MainWindow();
             mainWindow.Show();
         }

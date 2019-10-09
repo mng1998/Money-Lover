@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace MoneyLover.UI.Views
 {
     /// <summary>
-    /// Interaction logic for PassBook.xaml
+    /// Interaction logic for Notification.xaml
     /// </summary>
-    public partial class PassBook : Window
+    public partial class Notification : Window
     {
-        public PassBook()
+        public Notification()
         {
             InitializeComponent();
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
         }
     }
 }
