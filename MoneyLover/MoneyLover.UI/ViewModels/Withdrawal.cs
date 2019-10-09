@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,12 +47,13 @@ namespace MoneyLover.UI.ViewModels
 
         public void placeData()
         {
-            withDrawal.txtPassBookID.Text = "#" + passBook.PassBookID.ToString();
-            withDrawal.txtSentDate.Text = passBook.SentDate.ToString();
-            withDrawal.txtTerm.Text = passBook.Term.ToString();
-            withDrawal.txtInterestRates.Text = passBook.InterestRates.ToString();
-            withDrawal.txtDeposit.Text = passBook.Deposit.ToString();
-            withDrawal.txtEndDate.Text = passBook.EndDate.ToString();
+            withDrawal.txtPassBookID.Text = "#" + passBook.GetID;
+            withDrawal.txtBank.Text = Models.Bank.GetBank(passBook.BankID).BankName;
+            withDrawal.txtSentDate.Text = passBook.SentDate.ToString("dd/MM/yyyy");
+            withDrawal.txtTerm.Text = passBook.Term.ToString("0 tháng");
+            withDrawal.txtInterestRates.Text = passBook.InterestRates.ToString("#\\%");
+            withDrawal.txtDeposit.Text = passBook.Deposit.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+            withDrawal.txtEndDate.Text = passBook.EndDate.ToString("dd/MM/yyyy");
 
             if (passBook.EndDate <= DateTime.Now)
                 withDrawal.txtTotalMoney.Text = (passBook.Deposit + (passBook.Deposit * (passBook.InterestRates / 100) * passBook.Term) / 12).ToString();

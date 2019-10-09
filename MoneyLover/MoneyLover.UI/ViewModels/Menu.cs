@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace MoneyLover.UI.ViewModels
             menu = new Views.Menu();
 
             menu.txtBankName.Text = "Ngân hàng: " + Models.Bank.GetBank(pb.BankID).BankName;
-            menu.txtDeposit.Text = "Số tiền gửi: " + pb.Deposit.ToString() + " VNĐ";
+            menu.txtDeposit.Text = "Số tiền gửi: " + pb.Deposit.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ";
             menu.txtEndDate.Text = "Ngày đến hạn: " + pb.EndDate.ToString("dd/MM/yyyy");
             menu.txtPassBookID.Text = "Mã số: #" + pb.GetID;
 

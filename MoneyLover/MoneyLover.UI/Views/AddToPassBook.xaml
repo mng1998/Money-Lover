@@ -63,9 +63,10 @@
                     <TextBox x:Name="txtDeposit" IsReadOnly="True" materialDesign:HintAssist.Hint="Số tiền gửi" materialDesign:HintAssist.IsFloating="True"/>
                     <TextBox x:Name="txtTerm" IsReadOnly="True" materialDesign:HintAssist.Hint="Kỳ hạn" materialDesign:HintAssist.IsFloating="True"/>
                     <TextBox x:Name="txtEndDate" IsReadOnly="True" materialDesign:HintAssist.Hint="Ngày đến hạn" materialDesign:HintAssist.IsFloating="True"/>
-                    <TextBox x:Name="txtInterestRates" IsReadOnly="True" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True"/>                    
+                    <TextBox x:Name="txtInterestRates" IsReadOnly="True" materialDesign:HintAssist.Hint="Lãi suất (%/năm)" materialDesign:HintAssist.IsFloating="True"/>
                     <Border CornerRadius="4" Margin="10" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Padding="0,0,0,4">
                         <TextBox x:Name="txtAddMoreDeposit" materialDesign:HintAssist.Hint="Số tiền muốn gửi thêm" materialDesign:HintAssist.IsFloating="True">
+
                             <TextBox.Resources >
                                 <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
                                     <Setter Property="HorizontalAlignment" Value="Left"/>

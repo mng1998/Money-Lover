@@ -20,7 +20,7 @@
         BorderThickness="1"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
-      
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -66,7 +66,7 @@
                         HorizontalAlignment="Center"/>
         </StackPanel>
         <ScrollViewer Grid.Row="1" HorizontalContentAlignment="Center" CanContentScroll="True" PanningMode="HorizontalOnly" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Visible">
-       
+
             <Grid >
                 <Grid>
                     <Grid.RowDefinitions>
@@ -78,13 +78,13 @@
 
                     <Label Content="Danh sách sổ tiết kiệm hiện có" FontSize="10"/>
                     <Grid Grid.Row="0" x:Name="gridContent" >
-                        
+
                         <ScrollViewer  Grid.Row="1"  Height="270" BorderBrush="Black" BorderThickness="1">
                             <StackPanel x:Name="ListPassBook" Margin="5">
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
-                    
+
                     <WrapPanel Grid.Row="1" HorizontalAlignment="Center">
                         <Button x:Name="btnEditPassBook" Margin="10" Content="CHỈNH SỬA" TextElement.Foreground="Green" Background="White" BorderBrush="Green" TextElement.FontSize="10"/>
                         <Button x:Name="btnAddMore" Margin="10" Content="GỬI THÊM" TextElement.Foreground="Green" Background="White" BorderBrush="Green" TextElement.FontSize="10"/>
@@ -132,7 +132,7 @@
                 </Grid>
             </Grid>
         </ScrollViewer>
-       
-       
+
+
     </Grid>
 </Window>

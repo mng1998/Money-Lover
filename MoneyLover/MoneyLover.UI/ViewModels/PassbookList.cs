@@ -18,7 +18,7 @@ namespace MoneyLover.UI.ViewModels
         private int UserID = Convert.ToInt32(Application.Current.Resources["current_user_id"]);
         private Models.PassBook lastSelectedItem;
 
-        public PassbookList()
+        public PassbookList(MainWindow mainWindow)
         {
             passBookList = new Views.PassbookList();
 
@@ -88,6 +88,7 @@ namespace MoneyLover.UI.ViewModels
             passBookList.btnBack.Click += (sender, e) =>
             {
                 passBookList.Close();
+                mainWindow.mainWindow.Show();
                 Logout();
             };
         }
@@ -108,7 +109,7 @@ namespace MoneyLover.UI.ViewModels
                 groupBoxBank.Style = Application.Current.FindResource("MaterialDesignGroupBox") as Style;
                 groupBoxBank.Margin = new Thickness(16);
                 ColorZoneAssist.SetMode(groupBoxBank, ColorZoneMode.PrimaryDark);
-                groupBoxBank.Header = Bank.ShortName + " (" + Models.PassBook.TotalMoneyPassBookOfBank(UserID, Bank.BankID, false) + " đ)";
+                groupBoxBank.Header = Bank.ShortName + " (" + Models.PassBook.TotalMoneyPassBookOfBank(UserID, Bank.BankID, false).ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ)";
 
                 Grid grid = new Grid();
                 DataGrid dtgrid = new DataGrid();
@@ -135,7 +136,7 @@ namespace MoneyLover.UI.ViewModels
                 if (passBook.Count != 0)
                 {
                     dtgrid.ItemsSource = passBook;
-                    groupBox.Header = Bank.ShortName + " (" + Models.PassBook.TotalMoneyPassBookOfBank(UserID, Bank.BankID, false) + " đ)";
+                    groupBox.Header = Bank.ShortName + " (" + Models.PassBook.TotalMoneyPassBookOfBank(UserID, Bank.BankID, false).ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ)";
                     LoadTextBlockPassBook();
                 }
                 else
@@ -162,7 +163,13 @@ namespace MoneyLover.UI.ViewModels
                 dtgtextcolumn.Binding.StringFormat = "dd/MM/yyyy";
 
             if (header == "Tổng số tiền gốc")
-                dtgtextcolumn.Binding.StringFormat = "#,###";
+                dtgtextcolumn.Binding.StringFormat = string.Format("#,### đ", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+
+            if (header == "Kỳ hạn gửi")
+                dtgtextcolumn.Binding.StringFormat = "0 tháng";
+
+            if (header == "Lãi suất năm")
+                dtgtextcolumn.Binding.StringFormat = "#\\%";
 
             return dtgtextcolumn;
         }
@@ -193,8 +200,8 @@ namespace MoneyLover.UI.ViewModels
 
         public void LoadWallet()
         {
-            passBookList.txtWallet.Text = "Ví tiền tiết kiệm: " + Models.User.GetUser(UserID).SavingsWallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
-            passBookList.txtSavingsWallet.Text = "Ví tiền mặt: " + Models.User.GetUser(UserID).Wallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
+            passBookList.txtWallet.Text = "Ví tiền tiết kiệm: " + Models.User.GetUser(UserID).SavingsWallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ";
+            passBookList.txtSavingsWallet.Text = "Ví tiền mặt: " + Models.User.GetUser(UserID).Wallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ";
         }
 
         public void LoadHeaderSettlement()
@@ -204,7 +211,7 @@ namespace MoneyLover.UI.ViewModels
 
         public void LoadTextBlockPassBook()
         {
-            passBookList.txtTotalMoneyPassBook.Text = "Tổng tiền: " + Models.PassBook.TotalMoneyPassBook(UserID, false).ToString() + " (" + Models.PassBook.CountPassBook(UserID, false).ToString() + " sổ)";
+            passBookList.txtTotalMoneyPassBook.Text = "Tổng tiền: " + Models.PassBook.TotalMoneyPassBook(UserID, false).ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ (" + Models.PassBook.CountPassBook(UserID, false).ToString() + " sổ)";
         }
 
         public void RemoveGroupBoxBlank()
