@@ -42,6 +42,14 @@ namespace MoneyLover.UI.ViewModels
                 else
                     MessageBox.Show("Email hoặc Mật khẩu không chính xác!");
             };
+
+            signinView.btnClose.Click += (sender, e) =>
+            {
+                if (MessageBox.Show("Bạn muốn thoát ứng dụng ?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
+            };
         }
 
         public void Show()

@@ -52,7 +52,7 @@
                     Content="{materialDesign:PackIcon Kind=ArrowLeft}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     ToolTip="Trở về" />
-            <Button HorizontalAlignment="Right" Height="30" TextElement.Foreground="Black"
+            <Button x:Name="btnClose" HorizontalAlignment="Right" Height="30" TextElement.Foreground="Black"
                     Content="{materialDesign:PackIcon Kind=WindowClose}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     ToolTip="Thoát" />

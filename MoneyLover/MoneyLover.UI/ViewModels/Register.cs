@@ -41,6 +41,14 @@ namespace MoneyLover.UI.ViewModels
                 signIn = new SignIn(mainWindow);
                 signIn.signinView.Show();
             };
+
+            registerView.btnClose.Click += (sender, e) =>
+            {
+                if (MessageBox.Show("Bạn muốn thoát ứng dụng ?", "Confirm", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
+            };
         }
 
         public void Show()

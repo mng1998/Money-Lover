@@ -18,10 +18,6 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Button HorizontalAlignment="Right" Height="20" TextElement.Foreground="Black"
-                    Content="{materialDesign:PackIcon Kind=WindowClose}"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    ToolTip="Thoát" Margin="0,0,0,60" Width="45" />
             <Image HorizontalAlignment="Center" Source="../assets/bee.png"/>
         </Grid>
         <Grid Grid.Row="1">

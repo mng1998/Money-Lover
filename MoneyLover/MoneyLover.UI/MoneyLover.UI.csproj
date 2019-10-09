@@ -210,7 +210,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="assets\hide.png" />
+    <Resource Include="assets\show.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\logo.png" />
   </ItemGroup>
