@@ -33,7 +33,7 @@ namespace MoneyLover.UI.Validates
                 }
                 else if (deposit > user.Wallet)
                 {
-                    MessageBox.Show("Số tiền gửi phải bé hơn tiền mặt hiện có", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Số tiền gửi phải nhỏ hơn hoặc bằng số tiền mặt hiện có", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 else return true;

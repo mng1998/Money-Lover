@@ -15,6 +15,7 @@ namespace MoneyLover.UI.ViewModels
     {
         public Views.PassbookList passBookList;
         private PassBook passBook;
+        private UserInformation userInformation;
         private int UserID = Convert.ToInt32(Application.Current.Resources["current_user_id"]);
         private Models.PassBook lastSelectedItem;
 
@@ -103,6 +104,11 @@ namespace MoneyLover.UI.ViewModels
                 mainWindow.mainWindow.Show();
                 Logout();
             };
+            passBookList.btnSetting.Click += (sender, e) =>
+             {
+                 userInformation = new UserInformation();
+                 userInformation.ShowDialog();
+             };
         }
 
         public void Show()
@@ -117,7 +123,7 @@ namespace MoneyLover.UI.ViewModels
             if (groupBox == null && passBook.Count != 0)
             {
                 GroupBox groupBoxBank = new GroupBox();
-                groupBoxBank.Height = 220;
+                groupBoxBank.Height = 150;
                 groupBoxBank.Style = Application.Current.FindResource("MaterialDesignGroupBox") as Style;
                 groupBoxBank.Margin = new Thickness(16);
                 ColorZoneAssist.SetMode(groupBoxBank, ColorZoneMode.PrimaryDark);
@@ -212,8 +218,8 @@ namespace MoneyLover.UI.ViewModels
 
         public void LoadWallet()
         {
-            passBookList.txtWallet.Text = "Ví tiền tiết kiệm: " + Models.User.GetUser(UserID).SavingsWallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ";
-            passBookList.txtSavingsWallet.Text = "Ví tiền mặt: " + Models.User.GetUser(UserID).Wallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ";
+            //passBookList.txtWallet.Text = "Ví tiền tiết kiệm: " + Models.User.GetUser(UserID).SavingsWallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ";
+            //passBookList.txtSavingsWallet.Text = "Ví tiền mặt: " + Models.User.GetUser(UserID).Wallet.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat) + " đ";
         }
 
         public void LoadHeaderSettlement()
