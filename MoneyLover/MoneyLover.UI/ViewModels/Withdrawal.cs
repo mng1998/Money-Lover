@@ -24,19 +24,26 @@ namespace MoneyLover.UI.ViewModels
 
             withDrawal.btnSettlement.Click += (sender, e) =>
             {
-                Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
-                Models.User targetUser = db.Users.Find(passBook.UserID);
-                
-                targetUser.Wallet += Convert.ToDouble(withDrawal.txtTotalMoney.Text);
-                targetUser.SavingsWallet -= pb.Deposit;
-                passBook.Settlement = true;
+                try
+                {
+                    Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
+                    Models.User targetUser = db.Users.Find(passBook.UserID);
 
-                db.SaveChanges();
+                    targetUser.Wallet += Convert.ToDouble(withDrawal.txtTotalMoney.Text);
+                    targetUser.SavingsWallet -= pb.Deposit;
+                    passBook.Settlement = true;
 
-                withDrawal.Close();
-                pbList.ShowDataGrid();
-                pbList.passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
-                pbList.LoadHeaderSettlement();
+                    db.SaveChanges();
+
+                    withDrawal.Close();
+                    pbList.ShowDataGrid();
+                    pbList.passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
+                    pbList.LoadHeaderSettlement();
+                }
+                catch
+                {
+                    MessageBox.Show("Đã có lỗi xảy ra, vui lòng kiểm tra lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             };
 
             withDrawal.btnClose.Click += (sender, e) =>

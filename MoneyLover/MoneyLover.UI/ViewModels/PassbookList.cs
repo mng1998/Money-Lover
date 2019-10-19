@@ -38,8 +38,11 @@ namespace MoneyLover.UI.ViewModels
             {
                 try
                 {
-                    EditPassBook editPassBook = new EditPassBook(this, lastSelectedItem);
-                    editPassBook.ShowDialog();
+                    if (lastSelectedItem.Settlement == false)
+                    {
+                        EditPassBook editPassBook = new EditPassBook(this, lastSelectedItem);
+                        editPassBook.ShowDialog();
+                    }
                 }
                 catch { }
             };
@@ -48,8 +51,11 @@ namespace MoneyLover.UI.ViewModels
             {
                 try
                 {
-                    AddToPassBook addMore = new AddToPassBook(this, lastSelectedItem);
-                    addMore.ShowDialog();
+                    if (lastSelectedItem.Settlement == false)
+                    {
+                        AddToPassBook addMore = new AddToPassBook(this, lastSelectedItem);
+                        addMore.ShowDialog();
+                    }
                 }
                 catch { }
             };
@@ -58,8 +64,11 @@ namespace MoneyLover.UI.ViewModels
             {
                 try
                 {
-                    Withdrawal withDrawal = new Withdrawal(this, lastSelectedItem);
-                    withDrawal.ShowDialog();
+                    if (lastSelectedItem.Settlement == false)
+                    {
+                        Withdrawal withDrawal = new Withdrawal(this, lastSelectedItem);
+                        withDrawal.ShowDialog();
+                    }
                 }
                 catch { }
             };
@@ -68,8 +77,11 @@ namespace MoneyLover.UI.ViewModels
             {
                 try
                 {
-                    PartialWithdrawal partialWithDrawal = new PartialWithdrawal(this, lastSelectedItem);
-                    partialWithDrawal.ShowDialog();
+                    if (lastSelectedItem.Settlement == false)
+                    {
+                        PartialWithdrawal partialWithDrawal = new PartialWithdrawal(this, lastSelectedItem);
+                        partialWithDrawal.ShowDialog();
+                    }
                 }
                 catch { }
             };
