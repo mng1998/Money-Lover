@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
@@ -18,10 +19,22 @@ namespace MoneyLover.UI.ViewModels
 
             bank.btnSave.Click += (sender, e) =>
             {
-                db.Banks.Add(new Models.Bank { BankName = bank.txtBankName.Text, ShortName = bank.txtShortName.Text });
-                db.SaveChanges();
-                bank.dtgridListBank.ItemsSource = db.Banks.ToList();
-                pb.passBook.cbbBank.ItemsSource = db.Banks.ToList();
+                try
+                {
+                    if (bank.txtBankName.Text != "" && bank.txtShortName.Text != "")
+                    {
+                        db.Banks.Add(new Models.Bank { BankName = bank.txtBankName.Text, ShortName = bank.txtShortName.Text });
+                        db.SaveChanges();
+                        bank.dtgridListBank.ItemsSource = db.Banks.ToList();
+                        pb.passBook.cbbBank.ItemsSource = db.Banks.ToList();
+                    }
+                    else
+                        MessageBox.Show("Nội dung không được để rỗng", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch
+                {
+                    MessageBox.Show("Đã có lỗi xảy ra, vui lòng kiểm tra lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             };
 
             bank.btnCancel.Click += (sender, e) =>

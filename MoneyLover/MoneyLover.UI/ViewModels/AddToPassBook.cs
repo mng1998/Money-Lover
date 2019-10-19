@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
@@ -22,20 +23,32 @@ namespace MoneyLover.UI.ViewModels
 
             addToPassBook.btnSave.Click += (sender, e) =>
             {
-                Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
-                double moneyAdd = Convert.ToDouble(addToPassBook.txtAddMoreDeposit.Text);
-                if (ValidateAddDeposit(pb.UserID, moneyAdd))
+                try
                 {
-                    Models.User user = db.Users.Find(pb.UserID);
-                    user.Wallet -= moneyAdd;
-                    user.SavingsWallet += moneyAdd;
-                    passBook.Deposit += moneyAdd;
-                }
+                    Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
+                    if (addToPassBook.txtAddMoreDeposit.Text != "")
+                    {
+                        double moneyAdd = Convert.ToDouble(addToPassBook.txtAddMoreDeposit.Text);
+                        if (ValidateAddDeposit(pb.UserID, moneyAdd, passBook))
+                        {
+                            Models.User user = db.Users.Find(pb.UserID);
+                            user.Wallet -= moneyAdd;
+                            user.SavingsWallet += moneyAdd;
+                            passBook.Deposit += moneyAdd;
 
-                db.SaveChanges();
-                addToPassBook.Close();
-                placeData();
-                pbList.ShowDataGrid();
+                            db.SaveChanges();
+                            addToPassBook.Close();
+                            placeData();
+                            pbList.ShowDataGrid();
+                        }
+                    }
+                    else
+                        MessageBox.Show("Nội dung không được để rỗng", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch
+                {
+                    MessageBox.Show("Đã có lỗi xảy ra, vui lòng kiểm tra lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             };
 
             addToPassBook.btnClose.Click += (sender, e) =>

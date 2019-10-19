@@ -62,37 +62,59 @@ namespace MoneyLover.UI.ViewModels
             placeData();
             editPassBook.btnSave.Click += (sender, e) =>
             {
-                Models.PassBook targetPb = db.PassBooks.Find(pb.PassBookID);
-                Models.User user = db.Users.Find(pb.UserID);
-
-                int BankID = Convert.ToInt32(editPassBook.cbbBank.SelectedValue);
-                int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbTerm.SelectedItem).Key);
-                int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbPayInterest.SelectedItem).Key);
-                int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbDue.SelectedItem).Key);
-                double moneyEdit = Convert.ToDouble(editPassBook.txtDeposit.Text);
-
-                if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateEditDeposit(pb.UserID, pb.Deposit, moneyEdit))
+                try
                 {
-                    double backupDeposit = targetPb.Deposit;
+                    Models.PassBook targetPb = db.PassBooks.Find(pb.PassBookID);
+                    Models.User user = db.Users.Find(pb.UserID);
 
-                    targetPb.BankID = BankID;
-                    targetPb.Due = dueKey;
-                    targetPb.IndefiniteTerm = GetIndefiniteTerm(editPassBook.txtIndefiniteTerm.Text);
-                    targetPb.Term = TermKey;
-                    targetPb.PayInterest = payInterestKey;
-                    targetPb.SentDate = DateTime.Parse(editPassBook.dpDate.Text);
-                    targetPb.EndDate = DateTime.Parse(editPassBook.dpDate.Text).AddMonths(TermKey);
-                    targetPb.UserID = current_user.UserID;
-                    targetPb.InterestRates = Convert.ToDouble(editPassBook.txtInterestRates.Text);
-                    targetPb.Settlement = false;
-                    targetPb.Deposit = moneyEdit;
+                    int BankID = Convert.ToInt32(editPassBook.cbbBank.SelectedValue);
+                    int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbTerm.SelectedItem).Key);
+                    int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbPayInterest.SelectedItem).Key);
+                    int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbDue.SelectedItem).Key);
+                    double moneyEdit = Convert.ToDouble(editPassBook.txtDeposit.Text);
 
-                    user.SavingsWallet = user.SavingsWallet - backupDeposit + moneyEdit;
-                    user.Wallet = user.Wallet + backupDeposit - moneyEdit;
+                    if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateEditDeposit(pb.UserID, pb.Deposit, moneyEdit))
+                    {
+                        double backupDeposit = targetPb.Deposit;
 
-                    db.SaveChanges();
-                    editPassBook.Close();
-                    pbList.ShowDataGrid();
+                        targetPb.BankID = BankID;
+                        targetPb.Due = dueKey;
+                        targetPb.IndefiniteTerm = GetIndefiniteTerm(editPassBook.txtIndefiniteTerm.Text);
+                        targetPb.Term = TermKey;
+                        targetPb.PayInterest = payInterestKey;
+                        targetPb.SentDate = DateTime.Parse(editPassBook.dpDate.Text);
+                        targetPb.EndDate = DateTime.Parse(editPassBook.dpDate.Text).AddMonths(TermKey);
+                        targetPb.UserID = current_user.UserID;
+                        targetPb.InterestRates = Convert.ToDouble(editPassBook.txtInterestRates.Text);
+                        targetPb.Settlement = false;
+                        targetPb.Deposit = moneyEdit;
+
+                        user.SavingsWallet = user.SavingsWallet - backupDeposit + moneyEdit;
+                        user.Wallet = user.Wallet + backupDeposit - moneyEdit;
+
+                        db.SaveChanges();
+                        editPassBook.Close();
+                        pbList.ShowDataGrid();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Đã có lỗi xảy ra, vui lòng kiểm tra lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            };
+
+            editPassBook.cbbTerm.SelectionChanged += (sender, e) =>
+            {
+                int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbTerm.SelectedItem).Key);
+                if (TermKey == 99)
+                {
+                    editPassBook.txtIndefiniteTerm.IsEnabled = true;
+                    editPassBook.txtInterestRates.Text = "0";
+                    editPassBook.txtInterestRates.IsEnabled = false;
+                }
+                else
+                {
+                    editPassBook.txtInterestRates.IsEnabled = editPassBook.txtIndefiniteTerm.IsEnabled = true;
                 }
             };
 
@@ -117,6 +139,16 @@ namespace MoneyLover.UI.ViewModels
             editPassBook.cbbDue.SelectedIndex = passBook.Due - 1;
             editPassBook.cbbPayInterest.SelectedIndex = passBook.PayInterest - 1;
             editPassBook.cbbTerm.SelectedIndex = (passBook.Term == 99 ? 0 : (passBook.Term == 1 ? 1 : (passBook.Term == 3 ? 2 : (passBook.Term == 6 ? 3 : (passBook.Term == 12 ? 4 : 0)))));
+            if (editPassBook.cbbTerm.SelectedIndex == 0)
+            {
+                editPassBook.txtIndefiniteTerm.IsEnabled = true;
+                editPassBook.txtInterestRates.Text = "0";
+                editPassBook.txtInterestRates.IsEnabled = false;
+            }
+            else
+            {
+                editPassBook.txtInterestRates.IsEnabled = editPassBook.txtIndefiniteTerm.IsEnabled = true;
+            }
         }
 
         public void ShowDialog()

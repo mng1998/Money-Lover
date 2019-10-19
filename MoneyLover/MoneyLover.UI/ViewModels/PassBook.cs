@@ -55,7 +55,7 @@ namespace MoneyLover.UI.ViewModels
                 passBook.cbbTerm.ItemsSource = term;
                 passBook.cbbTerm.SelectedValuePath = "Keys";
                 passBook.cbbTerm.DisplayMemberPath = "Value";
-                passBook.cbbTerm.SelectedIndex = 0;
+                passBook.cbbTerm.SelectedIndex = 1;
 
                 passBook.cbbPayInterest.ItemsSource = payInterest;
                 passBook.cbbPayInterest.SelectedValuePath = "Keys";
@@ -70,26 +70,33 @@ namespace MoneyLover.UI.ViewModels
 
             passBook.btnSave.Click += (sender, e) =>
             {
-                int BankID = Convert.ToInt32(passBook.cbbBank.SelectedValue);
-                int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbTerm.SelectedItem).Key);
-                int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbPayInterest.SelectedItem).Key);
-                int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbDue.SelectedItem).Key);
-                Models.Bank Bank = Models.Bank.GetBank(BankID);
-
-                if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(passBook.txtDeposit.Text)))
+                try
                 {
-                    Models.PassBook pb = pbService.Create(BankID,
-                                     Convert.ToDouble(passBook.txtDeposit.Text),
-                                     dueKey,
-                                     GetIndefiniteTerm(passBook.txtIndefiniteTerm.Text),
-                                     TermKey,
-                                     payInterestKey,
-                                     DateTime.Parse(passBook.dpDate.Text),
-                                     current_user.UserID,
-                                     Convert.ToDouble(passBook.txtInterestRates.Text));
+                    int BankID = Convert.ToInt32(passBook.cbbBank.SelectedValue);
+                    int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbTerm.SelectedItem).Key);
+                    int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbPayInterest.SelectedItem).Key);
+                    int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbDue.SelectedItem).Key);
+                    Models.Bank Bank = Models.Bank.GetBank(BankID);
 
-                    pbList.ShowPassBookList(Bank, Models.PassBook.getListPassBook(current_user.UserID, BankID));
-                    passBook.Close();
+                    if (IsDateBeforeOrToday(passBook.dpDate.Text) && ValidateDeposit(current_user.UserID, Convert.ToDouble(passBook.txtDeposit.Text)))
+                    {
+                        Models.PassBook pb = pbService.Create(BankID,
+                                         Convert.ToDouble(passBook.txtDeposit.Text),
+                                         dueKey,
+                                         GetIndefiniteTerm(passBook.txtIndefiniteTerm.Text),
+                                         TermKey,
+                                         payInterestKey,
+                                         DateTime.Parse(passBook.dpDate.Text),
+                                         current_user.UserID,
+                                         Convert.ToDouble(passBook.txtInterestRates.Text));
+
+                        pbList.ShowPassBookList(Bank, Models.PassBook.getListPassBook(current_user.UserID, BankID));
+                        passBook.Close();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Đã có lỗi xảy ra, vui lòng kiểm tra lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             };
 
@@ -97,6 +104,21 @@ namespace MoneyLover.UI.ViewModels
             {
                 bank = new Bank(this);
                 bank.ShowDialog();
+            };
+
+            passBook.cbbTerm.SelectionChanged += (sender, e) =>
+            {
+                int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)passBook.cbbTerm.SelectedItem).Key);
+                if (TermKey == 99)
+                {
+                    passBook.txtIndefiniteTerm.IsEnabled = true;
+                    passBook.txtInterestRates.Text = "0";
+                    passBook.txtInterestRates.IsEnabled = false;
+                }
+                else
+                {
+                    passBook.txtInterestRates.IsEnabled = passBook.txtIndefiniteTerm.IsEnabled = true;
+                }
             };
 
             passBook.btnCancel.Click += (sender, e) =>
