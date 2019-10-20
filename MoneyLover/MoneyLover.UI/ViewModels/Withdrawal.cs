@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class Withdrawal
+    public class Withdrawal : Validates.AccountValidate
     {
         private Views.Withdrawal withDrawal;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
@@ -29,7 +29,7 @@ namespace MoneyLover.UI.ViewModels
                     Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
                     Models.User targetUser = db.Users.Find(passBook.UserID);
 
-                    targetUser.Wallet += Convert.ToDouble(withDrawal.txtTotalMoney.Text);
+                    targetUser.Wallet += getNumber(withDrawal.txtTotalMoney.Text);
                     targetUser.SavingsWallet -= pb.Deposit;
                     passBook.Settlement = true;
 
@@ -63,9 +63,9 @@ namespace MoneyLover.UI.ViewModels
             withDrawal.txtEndDate.Text = passBook.EndDate.ToString("dd/MM/yyyy");
 
             if (passBook.EndDate <= DateTime.Now)
-                withDrawal.txtTotalMoney.Text = (passBook.Deposit + (passBook.Deposit * (passBook.InterestRates / 100) * passBook.Term) / 12).ToString();
+                withDrawal.txtTotalMoney.Text = (passBook.Deposit + (passBook.Deposit * (passBook.InterestRates / 100) * passBook.Term) / 12).ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
             else
-                withDrawal.txtTotalMoney.Text = (passBook.Deposit + (passBook.Deposit * (passBook.IndefiniteTerm / 100) * passBook.Term) / 12).ToString();
+                withDrawal.txtTotalMoney.Text = (passBook.Deposit + (passBook.Deposit * (passBook.IndefiniteTerm / 100) * passBook.Term) / 12).ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
         }
 
         public void ShowDialog()
