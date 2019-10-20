@@ -42,6 +42,18 @@ namespace MoneyLover.UI.Validates
             }
         }
 
+        public double getNumber(string value)
+        {
+            var allowedChars = "01234567890";
+            string result = new string(value.Where(c => allowedChars.Contains(c)).ToArray());
+            return Convert.ToDouble(result);
+        }
+
+        public bool IsValidWallet(double wallet)
+        {
+            return (wallet > 0);
+        }
+
         public bool IsLetter(char c)
         {
             return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
