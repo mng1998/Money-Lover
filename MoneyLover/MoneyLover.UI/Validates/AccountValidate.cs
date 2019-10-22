@@ -11,16 +11,25 @@ namespace MoneyLover.UI.Validates
     {
         public bool IsValidEmail(string email)
         {
-            try
+            if (email.Length <= 0)
             {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                MessageBox.Show("Nhập sai định dạng email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Email không được để trống", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+            else
+            {
+                try
+                {
+                    var addr = new System.Net.Mail.MailAddress(email);
+                    return addr.Address == email;
+                }
+                catch
+                {
+                    MessageBox.Show("Nhập sai định dạng email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+            }
+
         }
 
         public bool IsValidPassword(string password)
