@@ -36,13 +36,6 @@ namespace MoneyLover.UI.Views
         {
             HidePassword();
         }
-        private void psdPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            //if (psdPassword.Password.Length > 0)
-            //    psdPassword.Visibility = Visibility.Visible;
-            //else
-            //    psdPassword.Visibility = Visibility.Hidden;
-        }
         public void ShowPassword()
         {
             txtVisiblePasswordbox.Visibility = Visibility.Visible;

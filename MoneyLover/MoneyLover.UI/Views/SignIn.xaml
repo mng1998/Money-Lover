@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        mc:Ignorable="d"        
+       mc:Ignorable="d"
         TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
         TextElement.FontFamily="Arial"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="#BFC3C5"
         Height="600" Width="350"
         ResizeMode="NoResize"
@@ -56,11 +59,14 @@
                     Content="{materialDesign:PackIcon Kind=WindowClose}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     ToolTip="Thoát" />
-                        
+
             <TextBlock Grid.Row="2" Text="Đăng nhập bằng email" VerticalAlignment="Bottom" TextElement.Foreground="Black" TextElement.FontSize="20" TextAlignment="Center" FontFamily="Arial"/>
             <TextBox x:Name="txtEmail" Grid.Row="3" materialDesign:HintAssist.Hint="Email"  materialDesign:HintAssist.IsFloating="True" />
-            <TextBox x:Name="txtVisiblePasswordbox" Grid.Row="4" Foreground="#a9a9a9"  materialDesign:HintAssist.Hint="Mật khẩu"  materialDesign:HintAssist.IsFloating="True"/>
-            <PasswordBox x:Name="psdPassword"  Grid.Row="4" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" PasswordChanged="psdPassword_PasswordChanged"/>
+            <TextBox x:Name="txtVisiblePasswordbox" Grid.Row="4" Foreground="#a9a9a9"  materialDesign:HintAssist.Hint=""  materialDesign:HintAssist.IsFloating="True"/>
+            <PasswordBox x:Name="psdPassword"  
+                         Grid.Row="4" 
+                         materialDesign:HintAssist.Hint="Mật khẩu" 
+                         materialDesign:HintAssist.IsFloating="True"/>
             <Button x:Name="btnShowPassword" 
                     MouseLeave="ImgShowHide_MouseLeave" 
                     PreviewMouseDown="ImgShowHide_PreviewMouseDown" 
@@ -68,14 +74,14 @@
                     HorizontalAlignment="Right" Height="30" 
                     TextElement.Foreground="Black"
                     Content="{materialDesign:PackIcon Kind=Eye}"
-                      Style="{StaticResource MaterialDesignFlatButton}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
                     Margin="0,28,10.4,8.4" Grid.Row="4"/>
-            
-            <Button x:Name="btnSignIn" Grid.Row ="5" Height="30" Width="320" Content="ĐĂNG NHẬP" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold"/>
-            <Button x:Name="btnRegister" Grid.Row ="8" Height="30" Content="ĐĂNG KÝ" 
+
+            <Button x:Name="btnRegister" Grid.Row ="5" Height="30" Width="320" Content="ĐĂNG NHẬP" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold"/>
+            <Button x:Name="btnSignIn" Grid.Row ="8" Height="30" Content="ĐĂNG KÝ" 
                     TextElement.Foreground="Green" TextElement.FontSize="10" TextElement.FontWeight="Bold"
                     Style="{StaticResource MaterialDesignFlatButton}"/>
-            
+
         </Grid>
     </Grid>
 </Window>
