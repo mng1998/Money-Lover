@@ -20,10 +20,11 @@ namespace MoneyLover.UI.ViewModels
             partialWithdrawal = new Views.PartialWithdrawal();
             passBook = pb;
 
-            placeData();
+            placeData();            
 
             partialWithdrawal.btnSave.Click += (sender, e) =>
             {
+                PartialWithdrawallValidate();
                 try
                 {
                     Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
@@ -57,6 +58,8 @@ namespace MoneyLover.UI.ViewModels
                             }
                             catch { MessageBox.Show("Số tiền rút không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
                         }
+                        else
+                            MessageBox.Show("Bạn chưa thể rút tiền. Số ngày gửi dưới 15 ngày.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     else
                     {
@@ -92,15 +95,14 @@ namespace MoneyLover.UI.ViewModels
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Số tiền rút không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("Số tiền rút không thể lớn hơn số tiện hiện có trong sổ tiết kiệm này", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             catch { MessageBox.Show("Số tiền rút không hợp lệ", "Error", MessageBoxButton.OK, MessageBoxImage.Error); }
                         }
                     }
 
-                    db.SaveChanges();
-                    partialWithdrawal.Close();
+                    db.SaveChanges();                    
                     pbList.ShowDataGrid();
                     pbList.passBookList.dtgridSettlement.ItemsSource = Models.PassBook.getListPassBookSettlement(UserID);
                     pbList.LoadHeaderSettlement();
@@ -126,6 +128,14 @@ namespace MoneyLover.UI.ViewModels
             partialWithdrawal.txtInterestRates.Text = passBook.InterestRates.ToString("#\\%");
             partialWithdrawal.txtDeposit.Text = passBook.Deposit.ToString("#,###", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
             partialWithdrawal.txtEndDate.Text = passBook.EndDate.ToString("dd/MM/yyyy");
+        }
+
+        public bool PartialWithdrawallValidate()
+        {
+            if (string.IsNullOrWhiteSpace(partialWithdrawal.txtWithDrawDeposit.Text))
+                MessageBox.Show("Hãy nhập số tiền cần rút", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            return false;
         }
 
         public void ShowDialog()

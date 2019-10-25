@@ -65,7 +65,10 @@
             <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" VerticalAlignment="Bottom" TextElement.Foreground="Black" TextElement.FontSize="20" TextAlignment="Center"/>
             <TextBox x:Name="txtEmail" Grid.Row ="3"   materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True" />
             <TextBox x:Name="txtVisiblePasswordbox" Grid.Row="4" Foreground="#a9a9a9"  materialDesign:HintAssist.Hint=""  materialDesign:HintAssist.IsFloating="True"/>
-            <PasswordBox x:Name="psdPassword"  Grid.Row="4" materialDesign:HintAssist.Hint="Mật khẩu" materialDesign:HintAssist.IsFloating="True" PasswordChanged="psdPassword_PasswordChanged"/>
+            <PasswordBox x:Name="psdPassword"  
+                         Grid.Row="4" 
+                         materialDesign:HintAssist.Hint="Mật khẩu" 
+                         materialDesign:HintAssist.IsFloating="True"/>
             <Button x:Name="btnShowPassword" 
                     MouseLeave="ImgShowHide_MouseLeave" 
                     PreviewMouseDown="ImgShowHide_PreviewMouseDown" 
