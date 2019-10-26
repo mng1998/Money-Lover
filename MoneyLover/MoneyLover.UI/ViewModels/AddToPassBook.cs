@@ -28,7 +28,7 @@ namespace MoneyLover.UI.ViewModels
                     Models.PassBook passBook = db.PassBooks.Find(pb.PassBookID);
                     if (addToPassBook.txtAddMoreDeposit.Text != "")
                     {
-                        double moneyAdd = Convert.ToDouble(addToPassBook.txtAddMoreDeposit.Text);
+                        double moneyAdd = getNumber(addToPassBook.txtAddMoreDeposit.Text);
                         if (ValidateAddDeposit(pb.UserID, moneyAdd, passBook))
                         {
                             Models.User user = db.Users.Find(pb.UserID);

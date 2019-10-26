@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace MoneyLover.UI.Validates
 {
-    public class PassBookValidate
+    public class PassBookValidate : AccountValidate
     {
         public bool IsDateBeforeOrToday(string input)
         {
@@ -44,23 +44,31 @@ namespace MoneyLover.UI.Validates
         {
             using (var db = new DB.MoneyLoverDB())
             {
-                Models.User user = db.Users.Find(UserID);
-                if (deposit < 100000)
+                if (passBook.Due != 3)
                 {
-                    MessageBox.Show("Số tiền gửi thêm tối thiểu là 100.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Models.User user = db.Users.Find(UserID);
+                    if (deposit < 100000)
+                    {
+                        MessageBox.Show("Số tiền gửi thêm tối thiểu là 100.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                    else if (deposit > user.Wallet)
+                    {
+                        MessageBox.Show("Số tiền gửi phải bé hơn tiền mặt hiện có", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                    else if ((DateTime.Now - passBook.EndDate).Days != 0)
+                    {
+                        MessageBox.Show("Chỉ được gửi thêm tiền khi đến kỳ hạn tính lãi suất", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return false;
+                    }
+                    else return true;
+                }
+                else
+                {
+                    MessageBox.Show("Gửi thêm tiền không áp dụng cho tất toán sổ khi đến hạn", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
-                else if (deposit > user.Wallet)
-                {
-                    MessageBox.Show("Số tiền gửi phải bé hơn tiền mặt hiện có", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                else if ((DateTime.Now - passBook.EndDate).Days != 0)
-                {
-                    MessageBox.Show("Chỉ được gửi thêm tiền khi đến kỳ hạn tính lãi suất", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                else return true;
             }
         }
 

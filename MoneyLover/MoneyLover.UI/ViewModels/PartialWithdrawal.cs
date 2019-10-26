@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace MoneyLover.UI.ViewModels
 {
-    public class PartialWithdrawal
+    public class PartialWithdrawal : Validates.PassBookValidate
     {
         private Views.PartialWithdrawal partialWithdrawal;
         private DB.MoneyLoverDB db = new DB.MoneyLoverDB();
@@ -37,7 +37,7 @@ namespace MoneyLover.UI.ViewModels
                         {
                             try
                             {
-                                double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
+                                double moneyWithdrawal = getNumber(partialWithdrawal.txtWithDrawDeposit.Text);
 
                                 if (moneyWithdrawal < pb.Deposit && moneyWithdrawal > 0)
                                 {
@@ -69,7 +69,7 @@ namespace MoneyLover.UI.ViewModels
                             {
                                 Notification noti = new Notification(pb);
                                 int day = Convert.ToInt32((DateTime.Now - pb.SentDate).TotalDays);
-                                double moneyWithdrawal = Convert.ToDouble(partialWithdrawal.txtWithDrawDeposit.Text);
+                                double moneyWithdrawal = getNumber(partialWithdrawal.txtWithDrawDeposit.Text);
 
                                 if (moneyWithdrawal < pb.Deposit && moneyWithdrawal > 0)
                                 {

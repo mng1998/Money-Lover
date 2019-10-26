@@ -71,7 +71,7 @@ namespace MoneyLover.UI.ViewModels
                     int TermKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbTerm.SelectedItem).Key);
                     int payInterestKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbPayInterest.SelectedItem).Key);
                     int dueKey = Convert.ToInt32(((KeyValuePair<int, string>)editPassBook.cbbDue.SelectedItem).Key);
-                    double moneyEdit = Convert.ToDouble(editPassBook.txtDeposit.Text);
+                    double moneyEdit = getNumber(editPassBook.txtDeposit.Text);
 
                     if (IsDateBeforeOrToday(editPassBook.dpDate.Text) && ValidateEditDeposit(pb.UserID, pb.Deposit, moneyEdit))
                     {
