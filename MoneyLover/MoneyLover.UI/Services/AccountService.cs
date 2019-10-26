@@ -30,13 +30,17 @@ namespace MoneyLover.UI.Services
 
         public bool Login(string email, string password)
         {
-            if (IsValidEmail(email) && IsValidPassword(password))
+            if (IsValidEmail(email))
             {
-                User checkUser = db.Users.Where(m => m.Email == email).FirstOrDefault();
-                if (checkUser != null && checkUser.Password == password)
+                if (IsValidPassword(password))
                 {
-                    StoreUser(checkUser);
-                    return true;
+                    User checkUser = db.Users.Where(m => m.Email == email).FirstOrDefault();
+                    if (checkUser != null && checkUser.Password == password)
+                    {
+                        StoreUser(checkUser);
+                        return true;
+                    }
+                    else return false;
                 }
                 else return false;
             }

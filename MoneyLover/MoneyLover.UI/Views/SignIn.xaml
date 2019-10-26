@@ -77,8 +77,8 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Margin="0,28,10.4,8.4" Grid.Row="4"/>
 
-            <Button x:Name="btnRegister" Grid.Row ="5" Height="30" Width="320" Content="ĐĂNG NHẬP" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold"/>
-            <Button x:Name="btnSignIn" Grid.Row ="8" Height="30" Content="ĐĂNG KÝ" 
+            <Button x:Name="btnSignIn" Grid.Row ="5" Height="30" Width="320" Content="ĐĂNG NHẬP" Background="Green" TextElement.Foreground="White" TextElement.FontSize="10" TextElement.FontWeight="Bold"/>
+            <Button x:Name="btnRegister" Grid.Row ="8" Height="30" Content="ĐĂNG KÝ" 
                     TextElement.Foreground="Green" TextElement.FontSize="10" TextElement.FontWeight="Bold"
                     Style="{StaticResource MaterialDesignFlatButton}"/>
 

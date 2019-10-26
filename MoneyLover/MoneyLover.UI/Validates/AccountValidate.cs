@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -23,7 +24,17 @@ namespace MoneyLover.UI.Validates
                     var addr = new System.Net.Mail.MailAddress(email);
                     return addr.Address == email;
                 }
-                catch
+                catch (ArgumentNullException)
+                {
+                    MessageBox.Show("Email không được null!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                catch (ArgumentException)
+                {
+                    MessageBox.Show("Không được để trống email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                catch (FormatException)
                 {
                     MessageBox.Show("Nhập sai định dạng email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
@@ -34,14 +45,20 @@ namespace MoneyLover.UI.Validates
 
         public bool IsValidPassword(string password)
         {
-            if (password.Length < 8)
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasDownChar = new Regex(@"[a-z]+");
+            var hasMinimum8Chars = new Regex(@".{8,}");
+            var hasSpecialChars = new Regex(@"[!@#$&*]+");
+
+            if (!hasMinimum8Chars.IsMatch(password))
             {
                 MessageBox.Show("Mật khẩu tối thiểu có 8 ký tự!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             else
             {
-                if (password.Any(c => IsLetter(c)) && password.Any(c => IsDigit(c)) && password.Any(c => IsSymbol(c)))
+                if (hasNumber.IsMatch(password) && hasUpperChar.IsMatch(password) && hasDownChar.IsMatch(password) && hasSpecialChars.IsMatch(password))
                     return true;
                 else
                 {
@@ -61,21 +78,6 @@ namespace MoneyLover.UI.Validates
         public bool IsValidWallet(double wallet)
         {
             return (wallet > 0);
-        }
-
-        public bool IsLetter(char c)
-        {
-            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-        }
-
-        public bool IsDigit(char c)
-        {
-            return c >= '0' && c <= '9';
-        }
-
-        public bool IsSymbol(char c)
-        {
-            return c > 32 && c < 127 && !IsDigit(c) && !IsLetter(c);
         }
     }
 }
