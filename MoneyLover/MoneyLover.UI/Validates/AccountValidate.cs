@@ -12,42 +12,32 @@ namespace MoneyLover.UI.Validates
     {
         public bool IsValidEmail(string email)
         {
-            if (email.Length <= 0)
+            try
             {
-                MessageBox.Show("Email không được để trống", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Email không được null!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            else
+            catch (ArgumentException)
             {
-                try
-                {
-                    var addr = new System.Net.Mail.MailAddress(email);
-                    return addr.Address == email;
-                }
-                catch (ArgumentNullException)
-                {
-                    MessageBox.Show("Email không được null!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                catch (ArgumentException)
-                {
-                    MessageBox.Show("Không được để trống email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
-                catch (FormatException)
-                {
-                    MessageBox.Show("Nhập sai định dạng email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return false;
-                }
+                MessageBox.Show("Không được để trống email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
-
+            catch (FormatException)
+            {
+                MessageBox.Show("Nhập sai định dạng email!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
         }
 
         public bool IsValidPassword(string password)
         {
             var hasNumber = new Regex(@"[0-9]+");
-            var hasUpperChar = new Regex(@"[A-Z]+");
-            var hasDownChar = new Regex(@"[a-z]+");
+            var hasChars = new Regex(@"[a-zA-Z]+");
             var hasMinimum8Chars = new Regex(@".{8,}");
             var hasSpecialChars = new Regex(@"[!@#$&*]+");
 
@@ -58,7 +48,7 @@ namespace MoneyLover.UI.Validates
             }
             else
             {
-                if (hasNumber.IsMatch(password) && hasUpperChar.IsMatch(password) && hasDownChar.IsMatch(password) && hasSpecialChars.IsMatch(password))
+                if (hasNumber.IsMatch(password) && hasChars.IsMatch(password) && hasSpecialChars.IsMatch(password))
                     return true;
                 else
                 {
