@@ -19,22 +19,15 @@ namespace MoneyLover.UI.ViewModels
 
             bank.btnSave.Click += (sender, e) =>
             {
-                try
+                if (bank.txtBankName.Text != "" && bank.txtShortName.Text != "")
                 {
-                    if (bank.txtBankName.Text != "" && bank.txtShortName.Text != "")
-                    {
-                        db.Banks.Add(new Models.Bank { BankName = bank.txtBankName.Text, ShortName = bank.txtShortName.Text });
-                        db.SaveChanges();
-                        bank.dtgridListBank.ItemsSource = db.Banks.ToList();
-                        pb.passBook.cbbBank.ItemsSource = db.Banks.ToList();
-                    }
-                    else
-                        MessageBox.Show("Nội dung không được để rỗng", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    db.Banks.Add(new Models.Bank { BankName = bank.txtBankName.Text, ShortName = bank.txtShortName.Text });
+                    db.SaveChanges();
+                    bank.dtgridListBank.ItemsSource = db.Banks.ToList();
+                    pb.passBook.cbbBank.ItemsSource = db.Banks.ToList();
                 }
-                catch
-                {
-                    MessageBox.Show("Đã có lỗi xảy ra, vui lòng kiểm tra lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                else
+                    MessageBox.Show("Nội dung không được để rỗng", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             };
 
             bank.btnCancel.Click += (sender, e) =>
