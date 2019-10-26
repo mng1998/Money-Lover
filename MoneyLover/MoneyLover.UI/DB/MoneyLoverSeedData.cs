@@ -12,16 +12,16 @@ namespace MoneyLover.UI.DB
     {
         protected override void Seed(MoneyLoverDB db)
         {
-            db.Users.Add(new User { Email = "user1@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user2@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user3@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user4@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user5@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user6@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user7@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user8@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user9@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
-            db.Users.Add(new User { Email = "user10@moneylover.com", Password = "moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user1@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user2@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user3@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user4@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user5@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user6@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user7@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user8@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user9@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
+            db.Users.Add(new User { Email = "user10@moneylover.com", Password = "!Moneylover", Wallet = 100000000, SavingsWallet = 0 });
 
             db.Banks.Add(new Bank { BankName = "Ngân hàng Á Châu", ShortName = "ACB" });
             db.Banks.Add(new Bank { BankName = "Ngân hàng Tiên Phong", ShortName = "TPBank" });
