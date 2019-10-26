@@ -88,7 +88,7 @@ namespace MoneyLover.UI.ViewModels
                                          payInterestKey,
                                          DateTime.Parse(passBook.dpDate.Text),
                                          current_user.UserID,
-                                         getNumber(passBook.txtInterestRates.Text));
+                                         Convert.ToDouble(passBook.txtInterestRates.Text));
 
                         pbList.ShowPassBookList(Bank, Models.PassBook.getListPassBook(current_user.UserID, BankID));
                         passBook.Close();
