@@ -77,9 +77,9 @@ namespace MoneyLover.UI.Validates
             using (var db = new DB.MoneyLoverDB())
             {
                 Models.User user = db.Users.Find(UserID);
-                if (deposit < 0)
+                if (deposit < 1000000)
                 {
-                    MessageBox.Show("Số tiền không được bé hơn 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Số tiền không được bé hơn 1.000.000đ", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return false;
                 }
                 else if (deposit > (user.Wallet + olddeposit))
