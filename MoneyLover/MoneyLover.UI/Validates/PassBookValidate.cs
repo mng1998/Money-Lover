@@ -93,14 +93,9 @@ namespace MoneyLover.UI.Validates
 
         public double GetIndefiniteTerm(string IndefiniteTerm)
         {
-            try
-            {
-                return Convert.ToDouble(IndefiniteTerm);
-            }
-            catch
-            {
+            if (IndefiniteTerm == "")
                 return 0.05;
-            }
+            else return Convert.ToDouble(IndefiniteTerm);
         }
     }
 }
