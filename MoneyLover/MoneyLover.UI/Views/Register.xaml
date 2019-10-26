@@ -32,7 +32,7 @@
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="320"/>
             <Setter Property="FontSize" Value="11"/>
-            <Setter Property="Foreground" Value="#a9a9a9 "/>
+            <Setter Property="Foreground" Value="Green"/>
         </Style>
     </Window.Resources>
     <Grid>
@@ -63,12 +63,13 @@
                     ToolTip="Thoát" />
 
             <TextBlock Grid.Row ="2" Text="Đăng ký bằng email" VerticalAlignment="Bottom" TextElement.Foreground="Black" TextElement.FontSize="20" TextAlignment="Center"/>
-            <TextBox x:Name="txtEmail" Grid.Row ="3"   materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True" />
-            <TextBox x:Name="txtVisiblePasswordbox" Grid.Row="4" Foreground="#a9a9a9"  materialDesign:HintAssist.Hint=""  materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="txtEmail" Grid.Row ="3"   materialDesign:HintAssist.Hint="Email" materialDesign:HintAssist.IsFloating="True" />           
             <PasswordBox x:Name="psdPassword"  
                          Grid.Row="4" 
                          materialDesign:HintAssist.Hint="Mật khẩu" 
                          materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="txtVisiblePasswordbox" 
+                     Grid.Row="4" Foreground="#a9a9a9"/>
             <Button x:Name="btnShowPassword" 
                     MouseLeave="ImgShowHide_MouseLeave" 
                     PreviewMouseDown="ImgShowHide_PreviewMouseDown" 
